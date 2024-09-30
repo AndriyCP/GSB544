@@ -99,16 +99,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p>embed-resources: true</p>
 <p>The Palmer Penguins dataset had a variety of column types with which to explore some nice visualizations. The <code>mtcars</code> dataset is another popular dataset for doing some simple data work, but does not contain the same types of variables.</p>
 <p>Run the following code to load the <code>mtcars</code> dataset and explore the observations and variables contained within. To learn more about this dataset check out <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html">this site</a></p>
-<div id="cell-2" class="cell" data-execution_count="1">
+<div id="cell-3" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>mtcars <span class="op">=</span> sm.datasets.get_rdataset(<span class="st">"mtcars"</span>, <span class="st">"datasets"</span>, cache<span class="op">=</span><span class="va">True</span>).data</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(mtcars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-3" class="cell" data-outputid="273959c0-345e-46d9-d624-ba978300aefc" data-execution_count="2">
+<div id="cell-4" class="cell" data-outputid="273959c0-345e-46d9-d624-ba978300aefc" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 
@@ -860,7 +861,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>The statement “the <code>mtcars</code> dataset does not contain the same types of variables as the penguins dataset” is a little true and a little false. There are no variables that contain text values, BUT there are variables that it makes sense to consider categorical variables. In most situations, it makes sense to treat the values of categorical variables as text values instead of numeric values.</p>
 <p>Use the <code>astype()</code> method to convert the categorical variables of the <code>mtcars</code> (df) dataset to have text values in the code chunk below. We’ve done one for you!</p>
-<div id="cell-5" class="cell">
+<div id="cell-6" class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"am"</span>] <span class="op">=</span> df[<span class="st">"am"</span>].astype(<span class="bu">str</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"vs"</span>] <span class="op">=</span> df[<span class="st">"vs"</span>].astype(<span class="bu">str</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"gear"</span>] <span class="op">=</span> df[<span class="st">"gear"</span>].astype(<span class="bu">str</span>)</span>
@@ -874,7 +875,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Create side-by-side boxplots of the <code>mpg</code> variable by the different values of the <code>am</code> variable. What happens if you convert the <code>am</code> variable back to float values and then try to create this same plot? Explain the differences between the two plots.</p></li>
 <li><p>Create overlaid histograms of the <code>hp</code> variable for the different values of the <code>cyl</code> variable. What happens if you convert the <code>cyl</code> variable back to float values and then try to create this same plot? Explain the differences between the two plots.</p></li>
 </ol>
-<div id="cell-7" class="cell" data-outputid="9f73d039-ff86-49dc-a197-0b902977e148">
+<div id="cell-8" class="cell" data-outputid="9f73d039-ff86-49dc-a197-0b902977e148">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plot for (1) here</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"am"</span>] <span class="op">=</span> df[<span class="st">"am"</span>].astype(<span class="bu">str</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -895,7 +896,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>1a. When the ‘am’ variable is cast as a string, it splits the data into categories by am values: 0 and 1, and further graphs the the mpg ranges for these two categories also distinguished by fill color of am.</p>
-<div id="cell-9" class="cell" data-outputid="0861b45f-0367-4717-e8ff-ea44a54e631b">
+<div id="cell-10" class="cell" data-outputid="0861b45f-0367-4717-e8ff-ea44a54e631b">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"am"</span>] <span class="op">=</span> df[<span class="st">"am"</span>].astype(<span class="bu">float</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>geom_boxplot2 <span class="op">=</span> (</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    ggplot(df, aes(x<span class="op">=</span><span class="st">"am"</span>, y<span class="op">=</span><span class="st">"mpg"</span>, fill <span class="op">=</span><span class="st">"am"</span>))</span>
@@ -912,7 +913,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>1b. When the ‘am’ variables is reverted to float, it combines the data on the plot from aes 0 and 1 and stretches it out horizontal, which is arguably less informative.</p>
-<div id="cell-11" class="cell" data-outputid="9b15a623-6f3f-4aa3-aa07-0078d9ba28d3">
+<div id="cell-12" class="cell" data-outputid="9b15a623-6f3f-4aa3-aa07-0078d9ba28d3">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Create plot for (2) here</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># df["cyl"] = df["cyl"].astype(str)</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>geom_hist1 <span class="op">=</span> (</span>
@@ -932,7 +933,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-12" class="cell" data-outputid="2ef29c8e-3577-4389-cb87-979159bb0385">
+<div id="cell-13" class="cell" data-outputid="2ef29c8e-3577-4389-cb87-979159bb0385">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"cyl"</span>] <span class="op">=</span> df[<span class="st">"cyl"</span>].astype(<span class="bu">float</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>geom_hist2 <span class="op">=</span> (</span>
@@ -956,7 +957,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Some of these variables, like the <code>cyl</code> variable, have numeric values that actually make sense as numbers (i.e.&nbsp;the number of cylinders in the engine). However, it doesn’t make the most sense to “do math” with this type of variable (e.g.&nbsp;take averages and such) because there are so few different value this can take on AND they’re an explicit choice made by the car manufacturer. So, it makes more sense to treat the <code>cyl</code> variable as a categorical variable despite it having numeric values.</p>
 <p>You will need to keep these kinds of nuances about data in mind as you work with an increasing variety and richness of data, and do more complex things with them.</p>
 <p>Choose 3 new <code>geometries</code> from the <a href="https://www.data-to-viz.com/">data-to-viz website</a> for graphs that you’d like to explore using the <code>mtcars</code> dataset, and then create those graphs!</p>
-<div id="cell-15" class="cell" data-outputid="92341508-6dd3-4e3f-d762-121eb857dbc7" data-execution_count="19">
+<div id="cell-16" class="cell" data-outputid="92341508-6dd3-4e3f-d762-121eb857dbc7" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plot with first new geometry here</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot between 'horsepower' and 'quater mile in seconds'</span></span>
@@ -971,7 +972,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-16" class="cell" data-outputid="52887b25-3e34-4abd-8955-bb57cf3b34c8" data-execution_count="30">
+<div id="cell-17" class="cell" data-outputid="52887b25-3e34-4abd-8955-bb57cf3b34c8" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plot with second new geometry here</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Buuble plot variation for 'horsepower' and 'quater mile time in seconds'</span></span>
@@ -988,7 +989,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-17" class="cell" data-outputid="72e765f4-003a-42d6-8300-02b1759d8d8c" data-execution_count="44">
+<div id="cell-18" class="cell" data-outputid="72e765f4-003a-42d6-8300-02b1759d8d8c" data-execution_count="44">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plot with third new geometry here</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Exploring relationship between weight 'wt'and 'mpg' on a density plot</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
