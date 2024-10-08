@@ -1,0 +1,2375 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Andriy Uspishnyi">
+<meta name="dcterms.date" content="2024-10-08">
+
+<title>544: Lab 2 assignment</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="544_Lab_2_themed_files/libs/clipboard/clipboard.min.js"></script>
+<script src="544_Lab_2_themed_files/libs/quarto-html/quarto.js"></script>
+<script src="544_Lab_2_themed_files/libs/quarto-html/popper.min.js"></script>
+<script src="544_Lab_2_themed_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="544_Lab_2_themed_files/libs/quarto-html/anchor.min.js"></script>
+<link href="544_Lab_2_themed_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="544_Lab_2_themed_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="544_Lab_2_themed_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="544_Lab_2_themed_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="544_Lab_2_themed_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">544: Lab 2 assignment</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Andriy Uspishnyi </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 8, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="cell-1" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="499">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 0. importing packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<div id="cell-2" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="500">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 0. importing original dataset</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># https://www.kaggle.com/datasets/timmate/avocado-prices-2020</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df_avo <span class="op">=</span> pd.read_csv(<span class="st">"/Users/andriy/Desktop/GSB544_ML/Week_1&amp;2/Lab_2/avocado-updated-2020.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<div id="cell-3" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="501">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. viewing dataset</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># df_avo.head()</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># df_avo.info()</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># df_avo.describe()</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print(df_avo['geography'].unique())</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<ol type="1">
+<li>The file contains data on avocado sales in the US from 2015 to 2020</li>
+</ol>
+<section id="data-types" class="level1">
+<h1>Data types:</h1>
+<p>RangeIndex: 33045 entries, 0 to 33044 Data columns (total 13 columns): N Column Non-Null Count Dtype<br>
+— —— ————– —–<br>
+0 date 33045 non-null object 1 average_price 33045 non-null float64 2 total_volume 33045 non-null float64 3 4046 33045 non-null float64 4 4225 33045 non-null float64 5 4770 33045 non-null float64 6 total_bags 33045 non-null float64 7 small_bags 33045 non-null float64 8 large_bags 33045 non-null float64 9 xlarge_bags 33045 non-null float64 10 type 33045 non-null object 11 year 33045 non-null int64<br>
+12 geography 33045 non-null object dtypes: float64(9), int64(1), object(3)</p>
+</section>
+<section id="data-fields-description" class="level1">
+<h1>Data fields description:</h1>
+<pre><code>Date - The date of the observation
+AveragePrice - the average price of a single avocado
+type - conventional or organic
+year - the year
+Region - the city or region of the observation
+Total Volume - Total number of avocados sold
+4046 - Total number of Small/Medium Hass Avocado with PLU 4046 sold
+4225 - Total number of Large Hass Avocado with PLU 4225 sold
+4770 - Total number of Extra Large Hass Avocado with PLU 4770 sold</code></pre>
+</section>
+<section id="unique-geographies" class="level1">
+<h1>Unique geographies:</h1>
+<pre><code>'Albany' 'Atlanta' 'Baltimore/Washington' 'Boise' 'Boston' 'Buffalo/Rochester' 'California' 'Charlotte' 'Chicago' 'Cincinnati/Dayton' 'Columbus' 'Dallas/Ft. Worth' 'Denver' 'Detroit' 'Grand Rapids' 'Great Lakes' 'Harrisburg/Scranton' 'Hartford/Springfield' 'Houston' 'Indianapolis'
+'Jacksonville' 'Las Vegas' 'Los Angeles' 'Louisville' 'Miami/Ft. Lauderdale' 'Midsouth' 'Nashville'
+'New Orleans/Mobile' 'New York' 'Northeast' 'Northern New England' 'Orlando' 'Philadelphia'
+'Phoenix/Tucson' 'Pittsburgh' 'Plains' 'Portland' 'Raleigh/Greensboro' 'Richmond/Norfolk' 'Roanoke'
+'Sacramento' 'San Diego' 'San Francisco' 'Seattle' 'South Carolina' 'South Central' 'Southeast'
+'Spokane' 'St. Louis' 'Syracuse' 'Tampa' 'Total U.S.' 'West' 'West Tex/New Mexico'</code></pre>
+<p>The data is not tidy: - type organic or conventional is mixed in 1 column. Can be solved with boolean masking. - the cities are mixed up in one column with regions, ie. one entry is part of the other (sum) – regions present: ‘Midsouth’, ‘Northeast’, ‘Southeast’, ‘West’ – states summarized: ‘California’. Note: assuming ‘New York’ represents a city (not a state) as there is not other mention of New York City in the dataset.</p>
+<div id="cell-5" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="502">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Cleaning the data</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># a. rename sizes columns</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>df_avo.rename(columns<span class="op">=</span>{<span class="st">'4046'</span>:<span class="st">'4046_SM'</span>, <span class="st">'4225'</span>:<span class="st">'4225_L'</span>, <span class="st">'4770'</span>:<span class="st">'4770_XL'</span>}, inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># b. adding boolean masking for category type: 'organic' (1 - organic, 0 - conventional)</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>df_avo[<span class="st">'organic'</span>] <span class="op">=</span> <span class="dv">1</span> <span class="op">*</span> (df_avo[<span class="st">'type'</span>] <span class="op">==</span> <span class="st">'organic'</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># c. converting 'date' to datetime objects to further extract data month and year</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>df_avo[<span class="st">'datetime'</span>] <span class="op">=</span> pd.to_datetime(df_avo[<span class="st">'date'</span>])</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>df_avo[<span class="st">'day'</span>]<span class="op">=</span>df_avo[<span class="st">'datetime'</span>].dt.month</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>df_avo[<span class="st">'month'</span>]<span class="op">=</span>df_avo[<span class="st">'datetime'</span>].dt.month</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>df_avo[<span class="st">'year'</span>]<span class="op">=</span>df_avo[<span class="st">'datetime'</span>].dt.year <span class="co"># year info already present in the dataset</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># d. creating new dataset filtered to four main regions</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>four_regions <span class="op">=</span> [<span class="st">'Midsouth'</span>, <span class="st">'Northeast'</span>, <span class="st">'Southeast'</span>, <span class="st">'West'</span>]</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>df_avo_four_regions <span class="op">=</span> df_avo[df_avo[<span class="st">'geography'</span>].isin(four_regions)]</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># e. creating new dataset filtered to cities only (to avoid doublecounts with 'four regions', 'Total U.S.' and 'California', and other sub regional areas)</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>non_cities <span class="op">=</span> [<span class="st">'Midsouth'</span>, <span class="st">'Northeast'</span>, <span class="st">'Southeast'</span>, <span class="st">'West'</span>, <span class="st">'California'</span>, <span class="st">'Total U.S.'</span>, <span class="st">'South Central'</span>, <span class="st">'Great Lakes'</span>, <span class="st">'Plains'</span>, <span class="st">'Northern New England'</span>]</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>df_avo_cities <span class="op">=</span> df_avo[<span class="op">~</span>df_avo[<span class="st">'geography'</span>].isin(non_cities)]</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co">#df_avo_california</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">#df_avo_four_regions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<div id="cell-6" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="503">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df_avo_cities</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">date</th>
+<th data-quarto-table-cell-role="th">average_price</th>
+<th data-quarto-table-cell-role="th">total_volume</th>
+<th data-quarto-table-cell-role="th">4046_SM</th>
+<th data-quarto-table-cell-role="th">4225_L</th>
+<th data-quarto-table-cell-role="th">4770_XL</th>
+<th data-quarto-table-cell-role="th">total_bags</th>
+<th data-quarto-table-cell-role="th">small_bags</th>
+<th data-quarto-table-cell-role="th">large_bags</th>
+<th data-quarto-table-cell-role="th">xlarge_bags</th>
+<th data-quarto-table-cell-role="th">type</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">geography</th>
+<th data-quarto-table-cell-role="th">organic</th>
+<th data-quarto-table-cell-role="th">datetime</th>
+<th data-quarto-table-cell-role="th">day</th>
+<th data-quarto-table-cell-role="th">month</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>40873</td>
+<td>2820</td>
+<td>28287</td>
+<td>50</td>
+<td>9716</td>
+<td>9187</td>
+<td>530</td>
+<td>0</td>
+<td>conventional</td>
+<td>2015</td>
+<td>Albany</td>
+<td>0</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2015-01-04</td>
+<td>2</td>
+<td>1374</td>
+<td>57</td>
+<td>154</td>
+<td>0</td>
+<td>1163</td>
+<td>1163</td>
+<td>0</td>
+<td>0</td>
+<td>organic</td>
+<td>2015</td>
+<td>Albany</td>
+<td>1</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>435021</td>
+<td>364302</td>
+<td>23821</td>
+<td>82</td>
+<td>46816</td>
+<td>16707</td>
+<td>30109</td>
+<td>0</td>
+<td>conventional</td>
+<td>2015</td>
+<td>Atlanta</td>
+<td>0</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2015-01-04</td>
+<td>2</td>
+<td>3847</td>
+<td>1500</td>
+<td>938</td>
+<td>0</td>
+<td>1408</td>
+<td>1071</td>
+<td>337</td>
+<td>0</td>
+<td>organic</td>
+<td>2015</td>
+<td>Atlanta</td>
+<td>1</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>788025</td>
+<td>53987</td>
+<td>552906</td>
+<td>39995</td>
+<td>141137</td>
+<td>137146</td>
+<td>3991</td>
+<td>0</td>
+<td>conventional</td>
+<td>2015</td>
+<td>Baltimore/Washington</td>
+<td>0</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">33036</td>
+<td>2020-11-29</td>
+<td>1</td>
+<td>3192</td>
+<td>166</td>
+<td>90</td>
+<td>0</td>
+<td>2935</td>
+<td>2619</td>
+<td>317</td>
+<td>0</td>
+<td>organic</td>
+<td>2020</td>
+<td>Syracuse</td>
+<td>1</td>
+<td>2020-11-29</td>
+<td>11</td>
+<td>11</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">33037</td>
+<td>2020-11-29</td>
+<td>1</td>
+<td>562437</td>
+<td>230469</td>
+<td>15290</td>
+<td>45</td>
+<td>316634</td>
+<td>251659</td>
+<td>64928</td>
+<td>47</td>
+<td>conventional</td>
+<td>2020</td>
+<td>Tampa</td>
+<td>0</td>
+<td>2020-11-29</td>
+<td>11</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">33038</td>
+<td>2020-11-29</td>
+<td>1</td>
+<td>11884</td>
+<td>102</td>
+<td>0</td>
+<td>0</td>
+<td>11782</td>
+<td>11782</td>
+<td>0</td>
+<td>0</td>
+<td>organic</td>
+<td>2020</td>
+<td>Tampa</td>
+<td>1</td>
+<td>2020-11-29</td>
+<td>11</td>
+<td>11</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">33043</td>
+<td>2020-11-29</td>
+<td>1</td>
+<td>822819</td>
+<td>234688</td>
+<td>80205</td>
+<td>10544</td>
+<td>497382</td>
+<td>285764</td>
+<td>210808</td>
+<td>810</td>
+<td>conventional</td>
+<td>2020</td>
+<td>West Tex/New Mexico</td>
+<td>0</td>
+<td>2020-11-29</td>
+<td>11</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">33044</td>
+<td>2020-11-29</td>
+<td>1</td>
+<td>24107</td>
+<td>1237</td>
+<td>618</td>
+<td>1565</td>
+<td>20687</td>
+<td>17825</td>
+<td>2862</td>
+<td>0</td>
+<td>organic</td>
+<td>2020</td>
+<td>West Tex/New Mexico</td>
+<td>1</td>
+<td>2020-11-29</td>
+<td>11</td>
+<td>11</td>
+</tr>
+</tbody>
+</table>
+
+<p>26925 rows × 17 columns</p>
+</div>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<div id="cell-7" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="504">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<div id="cell-8" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="504">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df_avo_four_regions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">date</th>
+<th data-quarto-table-cell-role="th">average_price</th>
+<th data-quarto-table-cell-role="th">total_volume</th>
+<th data-quarto-table-cell-role="th">4046_SM</th>
+<th data-quarto-table-cell-role="th">4225_L</th>
+<th data-quarto-table-cell-role="th">4770_XL</th>
+<th data-quarto-table-cell-role="th">total_bags</th>
+<th data-quarto-table-cell-role="th">small_bags</th>
+<th data-quarto-table-cell-role="th">large_bags</th>
+<th data-quarto-table-cell-role="th">xlarge_bags</th>
+<th data-quarto-table-cell-role="th">type</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">geography</th>
+<th data-quarto-table-cell-role="th">organic</th>
+<th data-quarto-table-cell-role="th">datetime</th>
+<th data-quarto-table-cell-role="th">day</th>
+<th data-quarto-table-cell-role="th">month</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">50</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>2578275</td>
+<td>575245</td>
+<td>1311503</td>
+<td>181059</td>
+<td>510468</td>
+<td>429167</td>
+<td>80987</td>
+<td>315</td>
+<td>conventional</td>
+<td>2015</td>
+<td>Midsouth</td>
+<td>0</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">51</td>
+<td>2015-01-04</td>
+<td>2</td>
+<td>58065</td>
+<td>10050</td>
+<td>25228</td>
+<td>3673</td>
+<td>19114</td>
+<td>17281</td>
+<td>1834</td>
+<td>0</td>
+<td>organic</td>
+<td>2015</td>
+<td>Midsouth</td>
+<td>1</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">58</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>3759283</td>
+<td>126641</td>
+<td>2860710</td>
+<td>7580</td>
+<td>764352</td>
+<td>669970</td>
+<td>94381</td>
+<td>0</td>
+<td>conventional</td>
+<td>2015</td>
+<td>Northeast</td>
+<td>0</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">59</td>
+<td>2015-01-04</td>
+<td>2</td>
+<td>48280</td>
+<td>4477</td>
+<td>22389</td>
+<td>23</td>
+<td>21391</td>
+<td>21380</td>
+<td>12</td>
+<td>0</td>
+<td>organic</td>
+<td>2015</td>
+<td>Northeast</td>
+<td>1</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">92</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>3204112</td>
+<td>2296069</td>
+<td>320374</td>
+<td>18938</td>
+<td>568731</td>
+<td>287820</td>
+<td>280911</td>
+<td>0</td>
+<td>conventional</td>
+<td>2015</td>
+<td>Southeast</td>
+<td>0</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">32996</td>
+<td>2020-11-29</td>
+<td>2</td>
+<td>215436</td>
+<td>12493</td>
+<td>22167</td>
+<td>29</td>
+<td>180748</td>
+<td>162466</td>
+<td>18251</td>
+<td>30</td>
+<td>organic</td>
+<td>2020</td>
+<td>Northeast</td>
+<td>1</td>
+<td>2020-11-29</td>
+<td>11</td>
+<td>11</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">33029</td>
+<td>2020-11-29</td>
+<td>1</td>
+<td>5074329</td>
+<td>2288488</td>
+<td>169801</td>
+<td>1876</td>
+<td>2614149</td>
+<td>2187694</td>
+<td>408444</td>
+<td>18010</td>
+<td>conventional</td>
+<td>2020</td>
+<td>Southeast</td>
+<td>0</td>
+<td>2020-11-29</td>
+<td>11</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">33030</td>
+<td>2020-11-29</td>
+<td>1</td>
+<td>141358</td>
+<td>1150</td>
+<td>5916</td>
+<td>48</td>
+<td>134245</td>
+<td>79452</td>
+<td>37802</td>
+<td>16990</td>
+<td>organic</td>
+<td>2020</td>
+<td>Southeast</td>
+<td>1</td>
+<td>2020-11-29</td>
+<td>11</td>
+<td>11</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">33041</td>
+<td>2020-11-29</td>
+<td>1</td>
+<td>5811114</td>
+<td>1352878</td>
+<td>589062</td>
+<td>19742</td>
+<td>3790665</td>
+<td>2197611</td>
+<td>1531530</td>
+<td>61524</td>
+<td>conventional</td>
+<td>2020</td>
+<td>West</td>
+<td>0</td>
+<td>2020-11-29</td>
+<td>11</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">33042</td>
+<td>2020-11-29</td>
+<td>1</td>
+<td>289961</td>
+<td>13274</td>
+<td>19341</td>
+<td>637</td>
+<td>256710</td>
+<td>122606</td>
+<td>134104</td>
+<td>0</td>
+<td>organic</td>
+<td>2020</td>
+<td>West</td>
+<td>1</td>
+<td>2020-11-29</td>
+<td>11</td>
+<td>11</td>
+</tr>
+</tbody>
+</table>
+
+<p>2448 rows × 17 columns</p>
+</div>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+</section>
+<section id="exercises" class="level1">
+<h1>Exercises</h1>
+<section id="which-major-geographical-region-sold-the-most-total-organic-small-hass-avocados-in-2017" class="level2">
+<h2 class="anchored" data-anchor-id="which-major-geographical-region-sold-the-most-total-organic-small-hass-avocados-in-2017">3. Which major geographical region sold the most total organic, small Hass avocados in 2017?</h2>
+<div id="cell-11" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="505">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform the groupby and sum operation # note: includes suggestions from ChatGPT</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>four_reg_2017 <span class="op">=</span> df_avo_four_regions[df_avo_four_regions[<span class="st">'year'</span>] <span class="op">==</span> <span class="dv">2017</span>].groupby(<span class="st">'geography'</span>).<span class="bu">sum</span>(numeric_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Disable scientific notation in pandas # note: based on suggestion from ChatGPT</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">'display.float_format'</span>, <span class="st">'</span><span class="sc">{:.0f}</span><span class="st">'</span>.<span class="bu">format</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the result</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(four_reg_2017)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           average_price  total_volume   4046_SM    4225_L  4770_XL  total_bags  small_bags  large_bags  xlarge_bags    year  organic  day  month
+geography                                                                                                                                        
+Midsouth             161     165553551  35422708  68600035  1773085    59757665    50400084     8758284       599296  213802       53  692    692
+Northeast            180     224647301  14531066 142179312  1780119    66156804    55462992    10010555       683260  213802       53  692    692
+Southeast            160     196737252 105912021  27503743   357361    62964125    38187594    23295136      1481392  213802       53  692    692
+West                 147     345054416 119268930  76871667  5973364   142940456    85436856    57196822       306777  213802       53  692    692
+           average_price  total_volume   4046_SM    4225_L  4770_XL  total_bags  small_bags  large_bags  xlarge_bags    year  organic  day  month
+geography                                                                                                                                        
+Midsouth             161     165553551  35422708  68600035  1773085    59757665    50400084     8758284       599296  213802       53  692    692
+Northeast            180     224647301  14531066 142179312  1780119    66156804    55462992    10010555       683260  213802       53  692    692
+Southeast            160     196737252 105912021  27503743   357361    62964125    38187594    23295136      1481392  213802       53  692    692
+West                 147     345054416 119268930  76871667  5973364   142940456    85436856    57196822       306777  213802       53  692    692</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<section id="answer-3-west-region-sold-the-most-4046-smallmedium-avovcado-in-2017-119268930" class="level3">
+<h3 class="anchored" data-anchor-id="answer-3-west-region-sold-the-most-4046-smallmedium-avovcado-in-2017-119268930">Answer 3: ‘West’ region sold the most 4046 small/medium avovcado in 2017: 119268930</h3>
+</section>
+</section>
+<section id="split-the-date-variable-into-month-day-and-year-variables.-in-which-month-is-the-highest-average-volume-of-avocado-sales" class="level2">
+<h2 class="anchored" data-anchor-id="split-the-date-variable-into-month-day-and-year-variables.-in-which-month-is-the-highest-average-volume-of-avocado-sales">4. Split the date variable into month, day, and year variables. In which month is the highest average volume of avocado sales?</h2>
+<p>Date was split earlier into day, month, year in #2. cleaning the data section</p>
+<div id="cell-14" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="506">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using city-filtered data to avoid double-count</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>df_avo_cities.groupby(<span class="st">'month'</span>)[<span class="st">'total_volume'</span>].mean().sort_values(ascending <span class="op">=</span> <span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>month
+5    329766
+2    321418
+6    307667
+4    297616
+3    290931
+1    289092
+7    286730
+8    278428
+9    267588
+10   250319
+11   243686
+12   238035
+Name: total_volume, dtype: float64</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<section id="answer-4" class="level3">
+<h3 class="anchored" data-anchor-id="answer-4">Answer 4:</h3>
+<p>‘Month 5’ (May) has the highest average of total avocado sales: 329766</p>
+</section>
+</section>
+<section id="which-metro-area-geographical-regions-sold-the-most-total-avocados" class="level2">
+<h2 class="anchored" data-anchor-id="which-metro-area-geographical-regions-sold-the-most-total-avocados">5. Which metro area geographical regions sold the most total avocados?</h2>
+<p>Plot side-by-side box-plots of the total volume for only the five metro geographical regions with the highest averages for the total_volume variable.</p>
+<div id="cell-17" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="507">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># checking top total sales in cities</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>df_avo_cities.groupby(<span class="st">'geography'</span>)[<span class="st">'total_volume'</span>].<span class="bu">sum</span>().sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>geography
+Los Angeles        959350488
+New York           528245244
+Dallas/Ft. Worth   436204161
+Houston            420843847
+Phoenix/Tucson     382523414
+Name: total_volume, dtype: float64</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<section id="answer" class="level3">
+<h3 class="anchored" data-anchor-id="answer">Answer:</h3>
+<p>Top 5 metro regions with total_volume sales:</p>
+<p>Los Angeles: 959350488</p>
+<p>New York: 528245244</p>
+<p>Dallas/Ft. Worth: 436204161</p>
+<p>Houston: 420843847</p>
+<p>Phoenix/Tucson: 382523414</p>
+<p>Out of top five metro areas, Los Angeles sold the most avocado in total: 959350488</p>
+<div id="cell-19" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="508">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creating filtered data set for 'five metro areas' = 'Dallas/Ft. Worth', 'Houston', 'Los Angeles', 'Phoenix/Tucson', 'New York'</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>top_five_metro <span class="op">=</span> [<span class="st">'Dallas/Ft. Worth'</span>, <span class="st">'Houston'</span>, <span class="st">'Los Angeles'</span>, <span class="st">'Phoenix/Tucson'</span>, <span class="st">'New York'</span>]</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>df_avo_five_metro <span class="op">=</span> df_avo[df_avo[<span class="st">'geography'</span>].isin(top_five_metro)]</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"># df_avo_five_metro</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<div id="cell-20" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="509">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df_avo_five_metro[<span class="st">'total_volume'</span>].<span class="bu">min</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>np.float64(4881.79)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<div id="cell-21" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="510">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>five_metro_sales_total <span class="op">=</span> df_avo_five_metro.groupby(<span class="st">'geography'</span>)[<span class="st">'total_volume'</span>].<span class="bu">sum</span>().sort_values(ascending<span class="op">=</span><span class="va">False</span>).reset_index()</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>five_metro_sales_total</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">geography</th>
+<th data-quarto-table-cell-role="th">total_volume</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Los Angeles</td>
+<td>959350488</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>New York</td>
+<td>528245244</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Dallas/Ft. Worth</td>
+<td>436204161</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Houston</td>
+<td>420843847</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Phoenix/Tucson</td>
+<td>382523414</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<div id="cell-22" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="511">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>five_metro_sales_average <span class="op">=</span> df_avo_five_metro.groupby(<span class="st">'geography'</span>)[<span class="st">'total_volume'</span>].mean().sort_values(ascending<span class="op">=</span><span class="va">False</span>).reset_index()</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>five_metro_sales_average</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">geography</th>
+<th data-quarto-table-cell-role="th">total_volume</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Los Angeles</td>
+<td>1567566</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>New York</td>
+<td>863146</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Dallas/Ft. Worth</td>
+<td>712752</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Houston</td>
+<td>687653</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Phoenix/Tucson</td>
+<td>625038</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+</section>
+<section id="box-plot-of-top-five-metro-areas-by-total_volume" class="level3">
+<h3 class="anchored" data-anchor-id="box-plot-of-top-five-metro-areas-by-total_volume">box plot of top five metro areas by total_volume</h3>
+<div id="cell-24" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="512">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>(ggplot(df_avo_five_metro,aes (x <span class="op">=</span> <span class="st">'geography'</span>, y <span class="op">=</span> <span class="st">'total_volume'</span>, fill <span class="op">=</span> <span class="st">'geography'</span>))</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> scale_y_continuous(trans <span class="op">=</span> <span class="st">'log2'</span>,</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    limits <span class="op">=</span> (df_avo_five_metro[<span class="st">'total_volume'</span>].<span class="bu">min</span>(), df_avo_five_metro[<span class="st">'total_volume'</span>].<span class="bu">max</span>()),</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    breaks <span class="op">=</span> five_metro_sales_average[<span class="st">'total_volume'</span>],</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> theme(legend_position <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="544_Lab_2_themed_files/figure-html/cell-16-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<div id="cell-25" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="513">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># version 2</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>(ggplot(df_avo_five_metro,aes (x <span class="op">=</span> <span class="st">'geography'</span>, y <span class="op">=</span> <span class="st">'total_volume'</span>, fill <span class="op">=</span> <span class="st">'geography'</span>))</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> scale_y_continuous(</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    limits <span class="op">=</span> (df_avo_five_metro[<span class="st">'total_volume'</span>].<span class="bu">min</span>(), df_avo_five_metro[<span class="st">'total_volume'</span>].<span class="bu">max</span>()),</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    breaks <span class="op">=</span> five_metro_sales_average[<span class="st">'total_volume'</span>],</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> theme(legend_position <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="544_Lab_2_themed_files/figure-html/cell-17-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<section id="note" class="level4">
+<h4 class="anchored" data-anchor-id="note">note:</h4>
+<p>I tried to adjust y-axis scales according to the sales_volumes and apply custom formats for y_axis (like in Lab 1), but the results were not much better than the above.</p>
+<p>FEEDBACK to the INSTRUCTOR: I spent hours trying to find a solution to this on my own (and didn’t find it in the end, which was frustrating and inefficient). I would appreciate more time take during the class for the instructor to give step-by-step guidance on how to adjust data visualization scales in cases where the data ranges vary by significant proportions. While there is definitely some value in trial and error learning, these are relatively easy manipulations, which without sufficient knowledge or guidance take too much time to figure out on my own (I would like not to rely on ChatGPT to help solve every issue like this, but instead understand upfront how to address them).</p>
+<p>The following four California geographical regions are in this data set: “Los Angeles”, “San Diego”, “Sacramento”, and “San Francisco”.</p>
+</section>
+</section>
+<section id="from-your-cleaned-data-set-create-a-data-set-with-only-these-california-regions-and-answer-the-following-questions-about-these-california-regions-only." class="level3">
+<h3 class="anchored" data-anchor-id="from-your-cleaned-data-set-create-a-data-set-with-only-these-california-regions-and-answer-the-following-questions-about-these-california-regions-only.">6. From your cleaned data set, create a data set with only these California regions and answer the following questions about these California regions only.</h3>
+<div id="cell-28" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="514">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creating new dataset for California regions</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>ca_regions <span class="op">=</span> [<span class="st">'Los Angeles'</span>, <span class="st">'San Diego'</span>, <span class="st">'Sacramento'</span>, <span class="st">'San Francisco'</span>]</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>avo_ca <span class="op">=</span> df_avo_cities[df_avo_cities[<span class="st">'geography'</span>].isin(ca_regions)].reset_index()</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>avo_ca</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">index</th>
+<th data-quarto-table-cell-role="th">date</th>
+<th data-quarto-table-cell-role="th">average_price</th>
+<th data-quarto-table-cell-role="th">total_volume</th>
+<th data-quarto-table-cell-role="th">4046_SM</th>
+<th data-quarto-table-cell-role="th">4225_L</th>
+<th data-quarto-table-cell-role="th">4770_XL</th>
+<th data-quarto-table-cell-role="th">total_bags</th>
+<th data-quarto-table-cell-role="th">small_bags</th>
+<th data-quarto-table-cell-role="th">large_bags</th>
+<th data-quarto-table-cell-role="th">xlarge_bags</th>
+<th data-quarto-table-cell-role="th">type</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">geography</th>
+<th data-quarto-table-cell-role="th">organic</th>
+<th data-quarto-table-cell-role="th">datetime</th>
+<th data-quarto-table-cell-role="th">day</th>
+<th data-quarto-table-cell-role="th">month</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>44</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>2682160</td>
+<td>1838000</td>
+<td>524430</td>
+<td>64226</td>
+<td>255504</td>
+<td>215572</td>
+<td>36982</td>
+<td>2951</td>
+<td>conventional</td>
+<td>2015</td>
+<td>Los Angeles</td>
+<td>0</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>45</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>54496</td>
+<td>47722</td>
+<td>1723</td>
+<td>0</td>
+<td>5051</td>
+<td>5051</td>
+<td>0</td>
+<td>0</td>
+<td>organic</td>
+<td>2015</td>
+<td>Los Angeles</td>
+<td>1</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>80</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>430139</td>
+<td>110694</td>
+<td>270108</td>
+<td>9738</td>
+<td>39600</td>
+<td>39600</td>
+<td>0</td>
+<td>0</td>
+<td>conventional</td>
+<td>2015</td>
+<td>Sacramento</td>
+<td>0</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>81</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>9213</td>
+<td>3728</td>
+<td>4328</td>
+<td>0</td>
+<td>1158</td>
+<td>1158</td>
+<td>0</td>
+<td>0</td>
+<td>organic</td>
+<td>2015</td>
+<td>Sacramento</td>
+<td>1</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>82</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>461607</td>
+<td>244152</td>
+<td>165299</td>
+<td>15303</td>
+<td>36853</td>
+<td>30884</td>
+<td>5595</td>
+<td>374</td>
+<td>conventional</td>
+<td>2015</td>
+<td>San Diego</td>
+<td>0</td>
+<td>2015-01-04</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2443</td>
+<td>33018</td>
+<td>2020-11-29</td>
+<td>1</td>
+<td>23531</td>
+<td>3304</td>
+<td>2057</td>
+<td>0</td>
+<td>18171</td>
+<td>18145</td>
+<td>26</td>
+<td>0</td>
+<td>organic</td>
+<td>2020</td>
+<td>Sacramento</td>
+<td>1</td>
+<td>2020-11-29</td>
+<td>11</td>
+<td>11</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2444</td>
+<td>33019</td>
+<td>2020-11-29</td>
+<td>1</td>
+<td>469357</td>
+<td>104510</td>
+<td>19988</td>
+<td>7210</td>
+<td>337648</td>
+<td>189341</td>
+<td>127702</td>
+<td>20605</td>
+<td>conventional</td>
+<td>2020</td>
+<td>San Diego</td>
+<td>0</td>
+<td>2020-11-29</td>
+<td>11</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2445</td>
+<td>33020</td>
+<td>2020-11-29</td>
+<td>2</td>
+<td>25800</td>
+<td>895</td>
+<td>838</td>
+<td>0</td>
+<td>24067</td>
+<td>9691</td>
+<td>14376</td>
+<td>0</td>
+<td>organic</td>
+<td>2020</td>
+<td>San Diego</td>
+<td>1</td>
+<td>2020-11-29</td>
+<td>11</td>
+<td>11</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2446</td>
+<td>33021</td>
+<td>2020-11-29</td>
+<td>2</td>
+<td>644141</td>
+<td>128555</td>
+<td>136718</td>
+<td>5597</td>
+<td>373270</td>
+<td>159277</td>
+<td>207760</td>
+<td>6234</td>
+<td>conventional</td>
+<td>2020</td>
+<td>San Francisco</td>
+<td>0</td>
+<td>2020-11-29</td>
+<td>11</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2447</td>
+<td>33022</td>
+<td>2020-11-29</td>
+<td>2</td>
+<td>59527</td>
+<td>2815</td>
+<td>4542</td>
+<td>0</td>
+<td>52169</td>
+<td>52034</td>
+<td>135</td>
+<td>0</td>
+<td>organic</td>
+<td>2020</td>
+<td>San Francisco</td>
+<td>1</td>
+<td>2020-11-29</td>
+<td>11</td>
+<td>11</td>
+</tr>
+</tbody>
+</table>
+
+<p>2448 rows × 18 columns</p>
+</div>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+</section>
+<section id="in-which-california-regions-is-the-price-of-organic-versus-conventional-avocados-most-different-support-your-answer-with-a-few-summary-statistics-and-a-visualization." class="level3">
+<h3 class="anchored" data-anchor-id="in-which-california-regions-is-the-price-of-organic-versus-conventional-avocados-most-different-support-your-answer-with-a-few-summary-statistics-and-a-visualization.">7. In which California regions is the price of organic versus conventional avocados most different? Support your answer with a few summary statistics AND a visualization.</h3>
+<div id="cell-30" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="515">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>avo_ca[<span class="st">'average_price'</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>array([0.85, 1.25, 1.05, 1.33, 0.94, 1.23, 0.99, 1.18, 1.08, 1.09, 1.27, 0.82, 1.03, 1.12, 0.89, 1.29, 1.22, 1.13, 1.01, 0.96, 1.19, 1.44, 1.02, 1.26, 1.21,
+       1.34, 0.74, 1.04, 1.11, 0.91, 1.06, 0.9 , 0.98, 1.5 , 0.92, 1.35, 0.83, 1.43, 1.63, 1.49, 1.55, 1.36, 1.14, 1.51, 1.39, 0.75, 0.95, 0.86, 1.6 , 1.48,
+       1.16, 1.56, 1.42, 1.52, 1.  , 1.2 , 1.64, 1.53, 1.3 , 0.93, 1.24, 1.65, 1.54, 1.41, 1.4 , 1.62, 0.78, 0.8 , 1.45, 1.32, 0.97, 1.37, 1.17, 0.84, 1.85,
+       1.31, 1.96, 0.79, 1.81, 0.87, 1.95, 1.46, 1.82, 1.47, 1.84, 1.86, 1.59, 1.72, 1.1 , 2.09, 1.98, 1.15, 2.36, 2.12, 1.71, 1.58, 2.75, 2.1 , 1.07, 1.57,
+       2.76, 1.61, 1.28, 2.17, 2.72, 2.73, 1.74, 2.71, 1.88, 2.77, 2.15, 1.66, 2.02, 2.  , 1.69, 2.79, 1.7 , 1.38, 2.74, 1.68, 2.01, 2.59, 2.66, 2.14, 1.94,
+       1.9 , 1.8 , 1.87, 0.81, 1.79, 2.04, 2.58, 0.66, 0.67, 1.83, 1.92, 0.64, 0.65, 1.93, 0.76, 1.73, 1.89, 0.72, 2.3 , 0.58, 0.61, 2.37, 2.38, 2.29, 2.31,
+       2.27, 2.33, 0.73, 2.07, 2.23, 2.03, 0.77, 2.05, 2.21, 0.62, 0.68, 2.34, 1.99, 2.08, 2.11, 0.88, 2.25, 2.13, 2.32, 1.91, 2.19, 1.97, 2.2 , 2.39, 2.18,
+       2.35, 2.64, 2.22, 2.28, 2.44, 2.93, 3.25, 1.78, 2.82, 2.51, 3.12, 2.65, 2.99, 1.67, 2.54, 2.94, 2.61, 1.75, 2.88, 2.52, 2.06, 2.67, 2.46, 2.57, 2.41,
+       2.56, 2.24, 2.7 , 0.6 , 0.53, 0.63, 0.7 , 2.5 , 2.92, 2.9 , 2.83, 2.43, 1.77, 2.4 , 2.48, 2.45, 2.16, 2.42, 2.49, 3.  , 1.76, 2.26, 2.78, 2.55])</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<div id="cell-31" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="516">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summarizing the data with groupby and basic stats</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>avo_ca_summary <span class="op">=</span> avo_ca.groupby([<span class="st">'geography'</span>, <span class="st">'type'</span>])[<span class="st">'average_price'</span>].agg([<span class="st">'mean'</span>, <span class="st">'std'</span>, <span class="st">'min'</span>, <span class="st">'max'</span>]).reset_index()</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(avo_ca_summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       geography          type  mean  std  min  max
+0    Los Angeles  conventional     1    0    1    2
+1    Los Angeles       organic     2    0    1    2
+2     Sacramento  conventional     1    0    1    2
+3     Sacramento       organic     2    0    1    3
+4      San Diego  conventional     1    0    1    2
+5      San Diego       organic     2    0    1    3
+6  San Francisco  conventional     1    0    1    2
+7  San Francisco       organic     2    0    1    3
+       geography          type  mean  std  min  max
+0    Los Angeles  conventional     1    0    1    2
+1    Los Angeles       organic     2    0    1    2
+2     Sacramento  conventional     1    0    1    2
+3     Sacramento       organic     2    0    1    3
+4      San Diego  conventional     1    0    1    2
+5      San Diego       organic     2    0    1    3
+6  San Francisco  conventional     1    0    1    2
+7  San Francisco       organic     2    0    1    3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<div id="cell-32" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="517">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pivoting data # assissted mapping pivot with ChatGPT</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>avo_ca_pivot <span class="op">=</span> avo_ca_summary.pivot(index<span class="op">=</span><span class="st">'geography'</span>, columns<span class="op">=</span><span class="st">'type'</span>, values<span class="op">=</span><span class="st">'mean'</span>).reset_index()</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="co"># estimate price difference per region</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>avo_ca_pivot[<span class="st">'price_difference'</span>] <span class="op">=</span> avo_ca_pivot[<span class="st">'organic'</span>] <span class="op">-</span> avo_ca_pivot[<span class="st">'conventional'</span>]</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(avo_ca_pivot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>type      geography  conventional  organic  price_difference
+0       Los Angeles             1        2                 1
+1        Sacramento             1        2                 1
+2         San Diego             1        2                 1
+3     San Francisco             1        2                 1
+type      geography  conventional  organic  price_difference
+0       Los Angeles             1        2                 1
+1        Sacramento             1        2                 1
+2         San Diego             1        2                 1
+3     San Francisco             1        2                 1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<p>The average price and price difference is similar between regions when rounded.</p>
+<div id="cell-34" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="518">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change formatting to two decimals # assisted by ChatGPT</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>avo_stats <span class="op">=</span> avo_ca_summary.copy()</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>avo_stats[<span class="st">'mean'</span>] <span class="op">=</span> avo_stats[<span class="st">'mean'</span>].<span class="bu">map</span>(<span class="st">'</span><span class="sc">{:.2f}</span><span class="st">'</span>.<span class="bu">format</span>)</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>avo_stats[<span class="st">'std'</span>] <span class="op">=</span> avo_stats[<span class="st">'std'</span>].<span class="bu">map</span>(<span class="st">'</span><span class="sc">{:.2f}</span><span class="st">'</span>.<span class="bu">format</span>)</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>avo_stats[<span class="st">'min'</span>] <span class="op">=</span> avo_stats[<span class="st">'min'</span>].<span class="bu">map</span>(<span class="st">'</span><span class="sc">{:.2f}</span><span class="st">'</span>.<span class="bu">format</span>)</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>avo_stats[<span class="st">'max'</span>] <span class="op">=</span> avo_stats[<span class="st">'max'</span>].<span class="bu">map</span>(<span class="st">'</span><span class="sc">{:.2f}</span><span class="st">'</span>.<span class="bu">format</span>)</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>avo_pivot_1 <span class="op">=</span> avo_ca_pivot.copy()</span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>avo_pivot_1[<span class="st">'conventional'</span>] <span class="op">=</span> avo_pivot_1[<span class="st">'conventional'</span>].<span class="bu">map</span>(<span class="st">'</span><span class="sc">{:.2f}</span><span class="st">'</span>.<span class="bu">format</span>)</span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>avo_pivot_1[<span class="st">'organic'</span>] <span class="op">=</span> avo_pivot_1[<span class="st">'organic'</span>].<span class="bu">map</span>(<span class="st">'</span><span class="sc">{:.2f}</span><span class="st">'</span>.<span class="bu">format</span>)</span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>avo_pivot_1[<span class="st">'price_difference'</span>] <span class="op">=</span> avo_pivot_1[<span class="st">'price_difference'</span>].<span class="bu">map</span>(<span class="st">'</span><span class="sc">{:.2f}</span><span class="st">'</span>.<span class="bu">format</span>)</span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Average price statistic by Region and type:'</span>)</span>
+<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(avo_stats)</span>
+<span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-18"><a href="#cb50-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">Price difference by region and type:'</span>)</span>
+<span id="cb50-19"><a href="#cb50-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(avo_pivot_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Average price statistic by Region and type:
+       geography          type  mean   std   min   max
+0    Los Angeles  conventional  1.05  0.23  0.53  1.80
+1    Los Angeles       organic  1.57  0.31  0.96  2.44
+2     Sacramento  conventional  1.30  0.22  0.86  1.89
+3     Sacramento       organic  1.87  0.29  1.13  2.82
+4      San Diego  conventional  1.11  0.24  0.61  1.83
+5      San Diego       organic  1.80  0.33  1.05  2.78
+6  San Francisco  conventional  1.40  0.27  0.84  2.20
+7  San Francisco       organic  2.12  0.40  1.06  3.25
+
+Price difference by region and type:
+type      geography conventional organic price_difference
+0       Los Angeles         1.05    1.57             0.53
+1        Sacramento         1.30    1.87             0.58
+2         San Diego         1.11    1.80             0.68
+3     San Francisco         1.40    2.12             0.72
+Average price statistic by Region and type:
+       geography          type  mean   std   min   max
+0    Los Angeles  conventional  1.05  0.23  0.53  1.80
+1    Los Angeles       organic  1.57  0.31  0.96  2.44
+2     Sacramento  conventional  1.30  0.22  0.86  1.89
+3     Sacramento       organic  1.87  0.29  1.13  2.82
+4      San Diego  conventional  1.11  0.24  0.61  1.83
+5      San Diego       organic  1.80  0.33  1.05  2.78
+6  San Francisco  conventional  1.40  0.27  0.84  2.20
+7  San Francisco       organic  2.12  0.40  1.06  3.25
+
+Price difference by region and type:
+type      geography conventional organic price_difference
+0       Los Angeles         1.05    1.57             0.53
+1        Sacramento         1.30    1.87             0.58
+2         San Diego         1.11    1.80             0.68
+3     San Francisco         1.40    2.12             0.72</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+</section>
+<section id="answer-1" class="level3">
+<h3 class="anchored" data-anchor-id="answer-1">answer:</h3>
+<p>Based on average price difference estimates - the largest differnece in price between organic and conventional avocado is in San Francisco: $0.72.</p>
+<div id="cell-36" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="519">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># visualization</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>(ggplot(avo_pivot_1, aes(x<span class="op">=</span><span class="st">'geography'</span>, y<span class="op">=</span><span class="st">'price_difference'</span>, fill <span class="op">=</span> <span class="st">'geography'</span>))</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_col())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="544_Lab_2_themed_files/figure-html/cell-23-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<div id="cell-37" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="520">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># alternative visualization of average price difference # assisted by ChatGPT</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>(ggplot(summary_stats, aes(x<span class="op">=</span><span class="st">'geography'</span>, y<span class="op">=</span><span class="st">'mean'</span>, fill<span class="op">=</span><span class="st">'type'</span>)) <span class="op">+</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>     geom_bar(stat<span class="op">=</span><span class="st">'identity'</span>, position<span class="op">=</span><span class="st">'dodge'</span>) <span class="op">+</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Error bars, using numeric values for ymin and ymax</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>     geom_errorbar(aes(ymin<span class="op">=</span><span class="st">'mean - std'</span>, ymax<span class="op">=</span><span class="st">'mean + std'</span>), position<span class="op">=</span><span class="st">'dodge'</span>, width<span class="op">=</span><span class="fl">0.25</span>) <span class="op">+</span></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>     labs(title<span class="op">=</span><span class="st">'Average Avocado Prices: Organic vs Conventional'</span>,</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>          x<span class="op">=</span><span class="st">'Region'</span>,</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>          y<span class="op">=</span><span class="st">'Average Price ($)'</span>,</span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>          fill<span class="op">=</span><span class="st">'Type'</span>) <span class="op">+</span></span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>     theme_minimal() <span class="op">+</span></span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a>     theme(axis_text_x<span class="op">=</span>element_text(rotation<span class="op">=</span><span class="dv">45</span>, hjust<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="544_Lab_2_themed_files/figure-html/cell-24-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+</section>
+<section id="the-following-plot-shows-for-all-four-california-regions-the-proportion-of-the-average-hass-avocado-sales-that-are-small-large-or-extra-large-conventional-vs.-organic.-recreate-the-plot-you-do-not-have-to-replicate-the-exact-finishing-touches---e.g.-color-theme---but-your-plot-should-resemble-the-content-of-this-plot." class="level3">
+<h3 class="anchored" data-anchor-id="the-following-plot-shows-for-all-four-california-regions-the-proportion-of-the-average-hass-avocado-sales-that-are-small-large-or-extra-large-conventional-vs.-organic.-recreate-the-plot-you-do-not-have-to-replicate-the-exact-finishing-touches---e.g.-color-theme---but-your-plot-should-resemble-the-content-of-this-plot.">8. The following plot shows, for all four California regions, the proportion of the average Hass avocado sales that are small, large, or extra large; conventional vs.&nbsp;organic. Recreate the plot; you do not have to replicate the exact finishing touches - e.g., color, theme - but your plot should resemble the content of this plot.</h3>
+<div id="cell-39" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="521">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># melting data to get the bag sizes in a single column # note: assisted by ChatGPT</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>bags_ca <span class="op">=</span> avo_ca.melt(</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>id_vars<span class="op">=</span>[<span class="st">'date'</span>, <span class="st">'average_price'</span>, <span class="st">'total_volume'</span>, <span class="st">'type'</span>, <span class="st">'geography'</span>], </span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>value_vars<span class="op">=</span>[<span class="st">'small_bags'</span>, <span class="st">'large_bags'</span>, <span class="st">'xlarge_bags'</span>],</span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>var_name<span class="op">=</span><span class="st">'size'</span>, </span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>value_name<span class="op">=</span><span class="st">'volume'</span>)</span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a><span class="co"># print(bags_ca)</span></span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a><span class="co"># grouping by region, type, and size to calculate the total volumes</span></span>
+<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a>bags_grouped <span class="op">=</span> bags_ca.groupby([<span class="st">'geography'</span>, <span class="st">'type'</span>, <span class="st">'size'</span>]).agg({<span class="st">'volume'</span>: <span class="st">'sum'</span>}).reset_index()</span>
+<span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: Calculate proportion of each size per region and type</span></span>
+<span id="cb57-15"><a href="#cb57-15" aria-hidden="true" tabindex="-1"></a>bags_grouped[<span class="st">'total_volume'</span>] <span class="op">=</span> bags_grouped.groupby([<span class="st">'geography'</span>, <span class="st">'type'</span>])[<span class="st">'volume'</span>].transform(<span class="st">'sum'</span>)</span>
+<span id="cb57-16"><a href="#cb57-16" aria-hidden="true" tabindex="-1"></a>bags_grouped[<span class="st">'proportion'</span>] <span class="op">=</span> bags_grouped[<span class="st">'volume'</span>] <span class="op">/</span> bags_grouped[<span class="st">'total_volume'</span>]</span>
+<span id="cb57-17"><a href="#cb57-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-18"><a href="#cb57-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bags_grouped)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        geography          type         size    volume  total_volume  proportion
+0     Los Angeles  conventional   large_bags  54762073     404231778           0
+1     Los Angeles  conventional   small_bags 324197093     404231778           1
+2     Los Angeles  conventional  xlarge_bags  25272612     404231778           0
+3     Los Angeles       organic   large_bags   4327894      19887800           0
+4     Los Angeles       organic   small_bags  15558820      19887800           1
+5     Los Angeles       organic  xlarge_bags      1086      19887800           0
+6      Sacramento  conventional   large_bags   4779515      26249379           0
+7      Sacramento  conventional   small_bags  20390268      26249379           1
+8      Sacramento  conventional  xlarge_bags   1079597      26249379           0
+9      Sacramento       organic   large_bags     11373       1321507           0
+10     Sacramento       organic   small_bags   1310134       1321507           1
+11     Sacramento       organic  xlarge_bags         0       1321507           0
+12      San Diego  conventional   large_bags  17826707      69364419           0
+13      San Diego  conventional   small_bags  49726768      69364419           1
+14      San Diego  conventional  xlarge_bags   1810944      69364419           0
+15      San Diego       organic   large_bags   1148193       2896585           0
+16      San Diego       organic   small_bags   1748392       2896585           1
+17      San Diego       organic  xlarge_bags         0       2896585           0
+18  San Francisco  conventional   large_bags  18022074      55577949           0
+19  San Francisco  conventional   small_bags  35154876      55577949           1
+20  San Francisco  conventional  xlarge_bags   2400999      55577949           0
+21  San Francisco       organic   large_bags     48115       4498889           0
+22  San Francisco       organic   small_bags   4450626       4498889           1
+23  San Francisco       organic  xlarge_bags       148       4498889           0
+        geography          type         size    volume  total_volume  proportion
+0     Los Angeles  conventional   large_bags  54762073     404231778           0
+1     Los Angeles  conventional   small_bags 324197093     404231778           1
+2     Los Angeles  conventional  xlarge_bags  25272612     404231778           0
+3     Los Angeles       organic   large_bags   4327894      19887800           0
+4     Los Angeles       organic   small_bags  15558820      19887800           1
+5     Los Angeles       organic  xlarge_bags      1086      19887800           0
+6      Sacramento  conventional   large_bags   4779515      26249379           0
+7      Sacramento  conventional   small_bags  20390268      26249379           1
+8      Sacramento  conventional  xlarge_bags   1079597      26249379           0
+9      Sacramento       organic   large_bags     11373       1321507           0
+10     Sacramento       organic   small_bags   1310134       1321507           1
+11     Sacramento       organic  xlarge_bags         0       1321507           0
+12      San Diego  conventional   large_bags  17826707      69364419           0
+13      San Diego  conventional   small_bags  49726768      69364419           1
+14      San Diego  conventional  xlarge_bags   1810944      69364419           0
+15      San Diego       organic   large_bags   1148193       2896585           0
+16      San Diego       organic   small_bags   1748392       2896585           1
+17      San Diego       organic  xlarge_bags         0       2896585           0
+18  San Francisco  conventional   large_bags  18022074      55577949           0
+19  San Francisco  conventional   small_bags  35154876      55577949           1
+20  San Francisco  conventional  xlarge_bags   2400999      55577949           0
+21  San Francisco       organic   large_bags     48115       4498889           0
+22  San Francisco       organic   small_bags   4450626       4498889           1
+23  San Francisco       organic  xlarge_bags       148       4498889           0</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<div id="cell-40" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="522">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  visualization # assisted by ChatGPT</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>(ggplot(bags_grouped, aes(x<span class="op">=</span><span class="st">'geography'</span>, y<span class="op">=</span><span class="st">'proportion'</span>, fill<span class="op">=</span><span class="st">'size'</span>))</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_bar(stat<span class="op">=</span><span class="st">'identity'</span>, position<span class="op">=</span><span class="st">'stack'</span>)</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> facet_wrap(<span class="st">'~type'</span>)</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(title<span class="op">=</span><span class="st">'Proportion of Average Hass Avocado Sales by Size'</span>,</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span><span class="st">'Region of California'</span>, y<span class="op">=</span><span class="st">'Proportion'</span>)</span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_y_continuous(labels<span class="op">=</span><span class="kw">lambda</span> l: [<span class="st">"</span><span class="sc">{:.0f}</span><span class="st">%"</span>.<span class="bu">format</span>(v <span class="op">*</span> <span class="dv">100</span>) <span class="cf">for</span> v <span class="kw">in</span> l]) </span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_minimal()</span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme(axis_text_x<span class="op">=</span>element_text(rotation<span class="op">=</span><span class="dv">45</span>, hjust<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_y_reverse()</span>
+<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/plotnine/scales/scales.py:48: PlotnineWarning: Scale for 'y' is already present.
+Adding another scale for 'y',
+which will replace the existing scale.
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="544_Lab_2_themed_files/figure-html/cell-26-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="using-outside-data" class="level2">
+<h2 class="anchored" data-anchor-id="using-outside-data">Using Outside Data</h2>
+<p>Find or make a data set with house prices for these four California regions. Join this data set with your California avocado data set.</p>
+<p>Use your new joined data set to make an argument about the relationship between house prices and avocado prices/sales.</p>
+<p>Support your argument with a plot.</p>
+<p>Answer: found house pricing data for four regions and downloaded in csv format for selected years 2015-2020 LA - https://fred.stlouisfed.org/series/ATNHPIUS06037A; SF - https://fred.stlouisfed.org/series/ATNHPIUS06075A; SC - https://fred.stlouisfed.org/series/ATNHPIUS06067A; SD - https://fred.stlouisfed.org/series/ATNHPIUS06073A configured it all in one table with base price index 100 = 2015</p>
+<div id="cell-44" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="523">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># loading 4 housing price data sets</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>ca_house_prices <span class="op">=</span> pd.read_csv(<span class="st">'alfredgraph.csv'</span>)</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ca_house_prices</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<div id="cell-45" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="524">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># formatting house price data</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>ca_houses <span class="op">=</span> ca_house_prices.copy()</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="co"># renaming columns to match avo regions</span></span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>ca_houses <span class="op">=</span> ca_houses.rename(columns<span class="op">=</span>{<span class="st">'ATNHPIUS06037A_NBD20150101_20220101'</span>:<span class="st">'Los Angeles'</span>,<span class="st">'ATNHPIUS06075A_NBD20150101_20220101'</span>:<span class="st">'San Francisco'</span>,<span class="st">'ATNHPIUS06067A_NBD20150101_20220101'</span>:<span class="st">'Sacramento'</span>,<span class="st">'ATNHPIUS06073A_NBD20150101_20220101'</span>:<span class="st">'San Diego'</span>})</span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a><span class="co"># converting date to extract year column for further melting with ca_avo</span></span>
+<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>ca_houses[<span class="st">'datetime'</span>] <span class="op">=</span> pd.to_datetime(ca_houses[<span class="st">'DATE'</span>])</span>
+<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a>ca_houses[<span class="st">'year'</span>] <span class="op">=</span> ca_houses[<span class="st">'datetime'</span>].dt.year</span>
+<span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a><span class="co">#ca_houses.info()</span></span>
+<span id="cb65-12"><a href="#cb65-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a><span class="co"># filtering 2014 from the data</span></span>
+<span id="cb65-14"><a href="#cb65-14" aria-hidden="true" tabindex="-1"></a>ca_houses_2015_2020 <span class="op">=</span> ca_houses[ca_houses[<span class="st">'year'</span>]<span class="op">!=</span><span class="dv">2014</span>].reset_index()</span>
+<span id="cb65-15"><a href="#cb65-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ca_houses_2015_2020)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   index        DATE  Los Angeles  San Francisco  Sacramento  San Diego   datetime  year
+0      1  2015-01-01          100            100         100        100 2015-01-01  2015
+1      2  2016-01-01          108            111         109        107 2016-01-01  2016
+2      3  2017-01-01          115            116         120        115 2017-01-01  2017
+3      4  2018-01-01          123            125         128        122 2018-01-01  2018
+4      5  2019-01-01          127            127         133        125 2019-01-01  2019
+5      6  2020-01-01          131            117         140        130 2020-01-01  2020
+   index        DATE  Los Angeles  San Francisco  Sacramento  San Diego   datetime  year
+0      1  2015-01-01          100            100         100        100 2015-01-01  2015
+1      2  2016-01-01          108            111         109        107 2016-01-01  2016
+2      3  2017-01-01          115            116         120        115 2017-01-01  2017
+3      4  2018-01-01          123            125         128        122 2018-01-01  2018
+4      5  2019-01-01          127            127         133        125 2019-01-01  2019
+5      6  2020-01-01          131            117         140        130 2020-01-01  2020</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<div id="cell-46" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="525">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transforming melted dataset # assisted by ChatGPT</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>ca_houses_t <span class="op">=</span> ca_houses_2015_2020.melt(id_vars<span class="op">=</span>[<span class="st">'year'</span>], </span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>    value_vars<span class="op">=</span>[<span class="st">'Los Angeles'</span>, <span class="st">'San Francisco'</span>, <span class="st">'Sacramento'</span>, <span class="st">'San Diego'</span>], </span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>    var_name<span class="op">=</span><span class="st">'geography'</span>, value_name<span class="op">=</span><span class="st">'house_price_index'</span>)</span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ca_houses_t)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    year      geography  house_price_index
+0   2015    Los Angeles                100
+1   2016    Los Angeles                108
+2   2017    Los Angeles                115
+3   2018    Los Angeles                123
+4   2019    Los Angeles                127
+5   2020    Los Angeles                131
+6   2015  San Francisco                100
+7   2016  San Francisco                111
+8   2017  San Francisco                116
+9   2018  San Francisco                125
+10  2019  San Francisco                127
+11  2020  San Francisco                117
+12  2015     Sacramento                100
+13  2016     Sacramento                109
+14  2017     Sacramento                120
+15  2018     Sacramento                128
+16  2019     Sacramento                133
+17  2020     Sacramento                140
+18  2015      San Diego                100
+19  2016      San Diego                107
+20  2017      San Diego                115
+21  2018      San Diego                122
+22  2019      San Diego                125
+23  2020      San Diego                130
+    year      geography  house_price_index
+0   2015    Los Angeles                100
+1   2016    Los Angeles                108
+2   2017    Los Angeles                115
+3   2018    Los Angeles                123
+4   2019    Los Angeles                127
+5   2020    Los Angeles                131
+6   2015  San Francisco                100
+7   2016  San Francisco                111
+8   2017  San Francisco                116
+9   2018  San Francisco                125
+10  2019  San Francisco                127
+11  2020  San Francisco                117
+12  2015     Sacramento                100
+13  2016     Sacramento                109
+14  2017     Sacramento                120
+15  2018     Sacramento                128
+16  2019     Sacramento                133
+17  2020     Sacramento                140
+18  2015      San Diego                100
+19  2016      San Diego                107
+20  2017      San Diego                115
+21  2018      San Diego                122
+22  2019      San Diego                125
+23  2020      San Diego                130</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<p>At this point we have data for four CA areas regarding annual house price growth since 2015 (base = 100) to 2020. Next step, format the ca_avo data to annual and base index of total sales volume (rather than price) to make it comparable to the house price data in four cities</p>
+<div id="cell-48" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="526">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># deriving base data from avocado sales dataset</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>ca_avo_volume <span class="op">=</span> avo_ca.groupby([<span class="st">'geography'</span>, <span class="st">'year'</span>])[<span class="st">'total_volume'</span>].<span class="bu">sum</span>().reset_index()</span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="co"># print(ca_avo_volume)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<div id="cell-49" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="527">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># adding column for 2015 as base for the 'total_volume growth index', assisted by ChatGPT</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>ca_avo_volume[<span class="st">'base_2015'</span>] <span class="op">=</span> ca_avo_volume.groupby(<span class="st">'geography'</span>)[<span class="st">'total_volume'</span>].transform(<span class="kw">lambda</span> x: x.loc[ca_avo_volume[<span class="st">'year'</span>] <span class="op">==</span> <span class="dv">2015</span>].values[<span class="dv">0</span>])</span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a><span class="co"># calculating growth index</span></span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>ca_avo_volume[<span class="st">'avo_sales_growth'</span>] <span class="op">=</span> (ca_avo_volume[<span class="st">'total_volume'</span>] <span class="op">/</span> ca_avo_volume[<span class="st">'base_2015'</span>]) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print(ca_avo_volume)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<div id="cell-50" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="528">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># merging the data on house_price_index and avo_sales_growth</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>ca_avo_houses <span class="op">=</span> pd.merge(ca_avo_volume, ca_houses_t, on<span class="op">=</span>[<span class="st">'geography'</span>, <span class="st">'year'</span>])</span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ca_avo_houses)</span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a><span class="co"># now we have comparable (same scale) figures on total avocado sales and house prices per region</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        geography  year  total_volume  base_2015  avo_sales_growth  house_price_index
+0     Los Angeles  2015     148220693  148220693               100                100
+1     Los Angeles  2016     163142303  148220693               110                108
+2     Los Angeles  2017     158481174  148220693               107                115
+3     Los Angeles  2018     150961957  148220693               102                123
+4     Los Angeles  2019     163162614  148220693               110                127
+5     Los Angeles  2020     175381748  148220693               118                131
+6      Sacramento  2015      21980538   21980538               100                100
+7      Sacramento  2016      23123030   21980538               105                109
+8      Sacramento  2017      23192429   21980538               106                120
+9      Sacramento  2018      26620608   21980538               121                128
+10     Sacramento  2019      26024338   21980538               118                133
+11     Sacramento  2020      28330372   21980538               129                140
+12      San Diego  2015      26585726   26585726               100                100
+13      San Diego  2016      29338051   26585726               110                107
+14      San Diego  2017      27194292   26585726               102                115
+15      San Diego  2018      26384798   26585726                99                122
+16      San Diego  2019      29758008   26585726               112                125
+17      San Diego  2020      34503574   26585726               130                130
+18  San Francisco  2015      39445802   39445802               100                100
+19  San Francisco  2016      41529628   39445802               105                111
+20  San Francisco  2017      41871503   39445802               106                116
+21  San Francisco  2018      49177444   39445802               125                125
+22  San Francisco  2019      49319325   39445802               125                127
+23  San Francisco  2020      52873187   39445802               134                117
+        geography  year  total_volume  base_2015  avo_sales_growth  house_price_index
+0     Los Angeles  2015     148220693  148220693               100                100
+1     Los Angeles  2016     163142303  148220693               110                108
+2     Los Angeles  2017     158481174  148220693               107                115
+3     Los Angeles  2018     150961957  148220693               102                123
+4     Los Angeles  2019     163162614  148220693               110                127
+5     Los Angeles  2020     175381748  148220693               118                131
+6      Sacramento  2015      21980538   21980538               100                100
+7      Sacramento  2016      23123030   21980538               105                109
+8      Sacramento  2017      23192429   21980538               106                120
+9      Sacramento  2018      26620608   21980538               121                128
+10     Sacramento  2019      26024338   21980538               118                133
+11     Sacramento  2020      28330372   21980538               129                140
+12      San Diego  2015      26585726   26585726               100                100
+13      San Diego  2016      29338051   26585726               110                107
+14      San Diego  2017      27194292   26585726               102                115
+15      San Diego  2018      26384798   26585726                99                122
+16      San Diego  2019      29758008   26585726               112                125
+17      San Diego  2020      34503574   26585726               130                130
+18  San Francisco  2015      39445802   39445802               100                100
+19  San Francisco  2016      41529628   39445802               105                111
+20  San Francisco  2017      41871503   39445802               106                116
+21  San Francisco  2018      49177444   39445802               125                125
+22  San Francisco  2019      49319325   39445802               125                127
+23  San Francisco  2020      52873187   39445802               134                117</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<div id="cell-51" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="529">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># melting data for visualization 1 # assisted by ChatGPT</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>ca_melted <span class="op">=</span> ca_avo_houses.melt(id_vars<span class="op">=</span>[<span class="st">'geography'</span>, <span class="st">'year'</span>], value_vars<span class="op">=</span>[<span class="st">'avo_sales_growth'</span>, <span class="st">'house_price_index'</span>],</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>                    var_name<span class="op">=</span><span class="st">'Metric'</span>, value_name<span class="op">=</span><span class="st">'Growth_Index'</span>)</span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ca_melted)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        geography  year             Metric  Growth_Index
+0     Los Angeles  2015   avo_sales_growth           100
+1     Los Angeles  2016   avo_sales_growth           110
+2     Los Angeles  2017   avo_sales_growth           107
+3     Los Angeles  2018   avo_sales_growth           102
+4     Los Angeles  2019   avo_sales_growth           110
+5     Los Angeles  2020   avo_sales_growth           118
+6      Sacramento  2015   avo_sales_growth           100
+7      Sacramento  2016   avo_sales_growth           105
+8      Sacramento  2017   avo_sales_growth           106
+9      Sacramento  2018   avo_sales_growth           121
+10     Sacramento  2019   avo_sales_growth           118
+11     Sacramento  2020   avo_sales_growth           129
+12      San Diego  2015   avo_sales_growth           100
+13      San Diego  2016   avo_sales_growth           110
+14      San Diego  2017   avo_sales_growth           102
+15      San Diego  2018   avo_sales_growth            99
+16      San Diego  2019   avo_sales_growth           112
+17      San Diego  2020   avo_sales_growth           130
+18  San Francisco  2015   avo_sales_growth           100
+19  San Francisco  2016   avo_sales_growth           105
+20  San Francisco  2017   avo_sales_growth           106
+21  San Francisco  2018   avo_sales_growth           125
+22  San Francisco  2019   avo_sales_growth           125
+23  San Francisco  2020   avo_sales_growth           134
+24    Los Angeles  2015  house_price_index           100
+25    Los Angeles  2016  house_price_index           108
+26    Los Angeles  2017  house_price_index           115
+27    Los Angeles  2018  house_price_index           123
+28    Los Angeles  2019  house_price_index           127
+29    Los Angeles  2020  house_price_index           131
+30     Sacramento  2015  house_price_index           100
+31     Sacramento  2016  house_price_index           109
+32     Sacramento  2017  house_price_index           120
+33     Sacramento  2018  house_price_index           128
+34     Sacramento  2019  house_price_index           133
+35     Sacramento  2020  house_price_index           140
+36      San Diego  2015  house_price_index           100
+37      San Diego  2016  house_price_index           107
+38      San Diego  2017  house_price_index           115
+39      San Diego  2018  house_price_index           122
+40      San Diego  2019  house_price_index           125
+41      San Diego  2020  house_price_index           130
+42  San Francisco  2015  house_price_index           100
+43  San Francisco  2016  house_price_index           111
+44  San Francisco  2017  house_price_index           116
+45  San Francisco  2018  house_price_index           125
+46  San Francisco  2019  house_price_index           127
+47  San Francisco  2020  house_price_index           117
+        geography  year             Metric  Growth_Index
+0     Los Angeles  2015   avo_sales_growth           100
+1     Los Angeles  2016   avo_sales_growth           110
+2     Los Angeles  2017   avo_sales_growth           107
+3     Los Angeles  2018   avo_sales_growth           102
+4     Los Angeles  2019   avo_sales_growth           110
+5     Los Angeles  2020   avo_sales_growth           118
+6      Sacramento  2015   avo_sales_growth           100
+7      Sacramento  2016   avo_sales_growth           105
+8      Sacramento  2017   avo_sales_growth           106
+9      Sacramento  2018   avo_sales_growth           121
+10     Sacramento  2019   avo_sales_growth           118
+11     Sacramento  2020   avo_sales_growth           129
+12      San Diego  2015   avo_sales_growth           100
+13      San Diego  2016   avo_sales_growth           110
+14      San Diego  2017   avo_sales_growth           102
+15      San Diego  2018   avo_sales_growth            99
+16      San Diego  2019   avo_sales_growth           112
+17      San Diego  2020   avo_sales_growth           130
+18  San Francisco  2015   avo_sales_growth           100
+19  San Francisco  2016   avo_sales_growth           105
+20  San Francisco  2017   avo_sales_growth           106
+21  San Francisco  2018   avo_sales_growth           125
+22  San Francisco  2019   avo_sales_growth           125
+23  San Francisco  2020   avo_sales_growth           134
+24    Los Angeles  2015  house_price_index           100
+25    Los Angeles  2016  house_price_index           108
+26    Los Angeles  2017  house_price_index           115
+27    Los Angeles  2018  house_price_index           123
+28    Los Angeles  2019  house_price_index           127
+29    Los Angeles  2020  house_price_index           131
+30     Sacramento  2015  house_price_index           100
+31     Sacramento  2016  house_price_index           109
+32     Sacramento  2017  house_price_index           120
+33     Sacramento  2018  house_price_index           128
+34     Sacramento  2019  house_price_index           133
+35     Sacramento  2020  house_price_index           140
+36      San Diego  2015  house_price_index           100
+37      San Diego  2016  house_price_index           107
+38      San Diego  2017  house_price_index           115
+39      San Diego  2018  house_price_index           122
+40      San Diego  2019  house_price_index           125
+41      San Diego  2020  house_price_index           130
+42  San Francisco  2015  house_price_index           100
+43  San Francisco  2016  house_price_index           111
+44  San Francisco  2017  house_price_index           116
+45  San Francisco  2018  house_price_index           125
+46  San Francisco  2019  house_price_index           127
+47  San Francisco  2020  house_price_index           117</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<div id="cell-52" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="530">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># visualization 1 - annual growth of avocado sales and house prices by city # assisted by ChatGPT</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>(ggplot(ca_melted, aes(x<span class="op">=</span><span class="st">'year'</span>, y<span class="op">=</span><span class="st">'Growth_Index'</span>, fill<span class="op">=</span><span class="st">'Metric'</span>))</span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_bar(stat<span class="op">=</span><span class="st">'identity'</span>, position<span class="op">=</span>position_dodge(width<span class="op">=</span><span class="fl">0.8</span>), width<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> facet_wrap(<span class="st">'~geography'</span>, scales<span class="op">=</span><span class="st">'free_y'</span>)  <span class="co">#  separate plots for each geography</span></span>
+<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> labs(title<span class="op">=</span><span class="st">'Annual Growth of Avocado Sales vs House Prices in California'</span>,</span>
+<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span><span class="st">'Year'</span>,</span>
+<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a>        y<span class="op">=</span><span class="st">'Growth Index'</span>,</span>
+<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a>        fill<span class="op">=</span><span class="st">'Growth Metric'</span>)</span>
+<span id="cb81-9"><a href="#cb81-9" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> theme_classic()</span>
+<span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> theme(axis_text_x<span class="op">=</span>element_text(rotation<span class="op">=</span><span class="dv">45</span>, hjust<span class="op">=</span><span class="dv">1</span>)) </span>
+<span id="cb81-11"><a href="#cb81-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb81-12"><a href="#cb81-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-13"><a href="#cb81-13" aria-hidden="true" tabindex="-1"></a><span class="co"># note: tried to scale y-axis values to start at level 80 with: + scale_y_continuous(limits=(80, None)), but it didn't work (now bars appeared on the plot).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="544_Lab_2_themed_files/figure-html/cell-34-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<div id="cell-53" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="531">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># measuring correlations between 'avo sales growth' and 'house prices growth' # assisted by ChatGPT</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>avo_house_correl <span class="op">=</span> ca_avo_houses.groupby(<span class="st">'geography'</span>).<span class="bu">apply</span>(<span class="kw">lambda</span> x: x[<span class="st">'avo_sales_growth'</span>].corr(x[<span class="st">'house_price_index'</span>]))</span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a><span class="co"># creating dataframe of correlation with two decimal point format</span></span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>avo_house_correl_df <span class="op">=</span> avo_house_correl.reset_index(name<span class="op">=</span><span class="st">'avo_sales_and_house_prices_correlation'</span>)</span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a>avo_house_correl_df[<span class="st">'avo_sales_and_house_prices_correlation'</span>] <span class="op">=</span> avo_house_correl_df[<span class="st">'avo_sales_and_house_prices_correlation'</span>].<span class="bu">map</span>(<span class="st">'</span><span class="sc">{:.2f}</span><span class="st">'</span>.<span class="bu">format</span>)</span>
+<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(avo_house_correl_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       geography avo_sales_and_house_prices_correlation
+0    Los Angeles                                   0.62
+1     Sacramento                                   0.94
+2      San Diego                                   0.61
+3  San Francisco                                   0.75
+       geography avo_sales_and_house_prices_correlation
+0    Los Angeles                                   0.62
+1     Sacramento                                   0.94
+2      San Diego                                   0.61
+3  San Francisco                                   0.75</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>&lt;positron-console-cell-531&gt;:2: DeprecationWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<div id="cell-54" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="532">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># visualization 2 - correlation between house prices and total avocado sales volume # assisted by ChatGPT</span></span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>(ggplot(avo_house_correl_df, aes(x<span class="op">=</span><span class="st">'geography'</span>, y<span class="op">=</span><span class="st">'avo_sales_and_house_prices_correlation'</span>, fill<span class="op">=</span><span class="st">'geography'</span>))</span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_bar(stat<span class="op">=</span><span class="st">'identity'</span>, width<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_text(aes(label<span class="op">=</span><span class="bu">round</span>(avo_house_correl_df[<span class="st">'avo_sales_and_house_prices_correlation'</span>], <span class="dv">2</span>)), </span>
+<span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a>     va<span class="op">=</span><span class="st">'bottom'</span>, size<span class="op">=</span><span class="dv">10</span>) </span>
+<span id="cb86-6"><a href="#cb86-6" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> labs(title<span class="op">=</span><span class="st">'Correlation Between House Prices and Avocado Sales'</span>,</span>
+<span id="cb86-7"><a href="#cb86-7" aria-hidden="true" tabindex="-1"></a>          x<span class="op">=</span><span class="st">'Region of California'</span>, </span>
+<span id="cb86-8"><a href="#cb86-8" aria-hidden="true" tabindex="-1"></a>          y<span class="op">=</span><span class="st">'Correlation (Avocado Sales and House Prices)'</span>)</span>
+<span id="cb86-9"><a href="#cb86-9" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> theme_classic()</span>
+<span id="cb86-10"><a href="#cb86-10" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> theme(legend_position<span class="op">=</span><span class="st">'none'</span>,</span>
+<span id="cb86-11"><a href="#cb86-11" aria-hidden="true" tabindex="-1"></a>          axis_text_x<span class="op">=</span>element_text(rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">'right'</span>, size<span class="op">=</span><span class="dv">10</span>),</span>
+<span id="cb86-12"><a href="#cb86-12" aria-hidden="true" tabindex="-1"></a>          figure_size<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
+<span id="cb86-13"><a href="#cb86-13" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="544_Lab_2_themed_files/figure-html/cell-36-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
+</div>
+</div>
+<section id="summary" class="level3">
+<h3 class="anchored" data-anchor-id="summary">Summary</h3>
+<p>Based on the analysis of annual house price index and avocado volume sales per region in California, you can see that both experience growth since 2015, with the highest correlation in Sacramento (0.94) and the lowest in San Diego (0.61). While this shows a common growth trend for both house prices and avocado sales in these regions of California it is not sufficient to conclude how one impacts the other, given this limited data.</p>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
