@@ -102,32 +102,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Import the Palmer Penguins dataset and print out the first few rows.</p>
 <p>Suppose we want to predict <code>bill_depth_mm</code> using the other variables in the dataset.</p>
 <p><strong>Dummify</strong> all variables that require this.</p>
-<div id="cell-2" class="cell" data-outputid="569d7f67-0a6c-4faf-e36f-50f0c4ab6cd2" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install palmerpenguins</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-2" class="cell" data-outputid="b60c2b97-c7d7-43da-f0fb-899cf5f0cc89" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># !pip install palmerpenguins</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Collecting palmerpenguins
-  Downloading palmerpenguins-0.1.4-py3-none-any.whl.metadata (2.0 kB)
+<pre><code>Requirement already satisfied: palmerpenguins in /usr/local/lib/python3.10/dist-packages (0.1.4)
 Requirement already satisfied: pandas in /usr/local/lib/python3.10/dist-packages (from palmerpenguins) (2.2.2)
 Requirement already satisfied: numpy in /usr/local/lib/python3.10/dist-packages (from palmerpenguins) (1.26.4)
 Requirement already satisfied: python-dateutil&gt;=2.8.2 in /usr/local/lib/python3.10/dist-packages (from pandas-&gt;palmerpenguins) (2.8.2)
 Requirement already satisfied: pytz&gt;=2020.1 in /usr/local/lib/python3.10/dist-packages (from pandas-&gt;palmerpenguins) (2024.2)
 Requirement already satisfied: tzdata&gt;=2022.7 in /usr/local/lib/python3.10/dist-packages (from pandas-&gt;palmerpenguins) (2024.2)
-Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.10/dist-packages (from python-dateutil&gt;=2.8.2-&gt;pandas-&gt;palmerpenguins) (1.16.0)
-Downloading palmerpenguins-0.1.4-py3-none-any.whl (17 kB)
-Installing collected packages: palmerpenguins
-Successfully installed palmerpenguins-0.1.4</code></pre>
+Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.10/dist-packages (from python-dateutil&gt;=2.8.2-&gt;pandas-&gt;palmerpenguins) (1.16.0)</code></pre>
 </div>
 </div>
 <div id="cell-3" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-4" class="cell" data-outputid="cd332e6d-9313-42b4-ab6a-165c55da7e05" data-execution_count="3">
+<div id="cell-4" class="cell" data-outputid="0575bcdf-4eb9-485f-e522-b18a223fef70" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> load_penguins()</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>penguins.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 
-  <div id="df-02e64448-8819-4f8d-b5ab-d23310bc67d0" class="colab-df-container">
+  <div id="df-4e83c252-7354-4125-a034-6a735fdf11b1" class="colab-df-container">
     <div>
 
 
@@ -208,7 +204,7 @@ Successfully installed palmerpenguins-0.1.4</code></pre>
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-02e64448-8819-4f8d-b5ab-d23310bc67d0')" title="Convert this dataframe to an interactive table." style="display:none;">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-4e83c252-7354-4125-a034-6a735fdf11b1')" title="Convert this dataframe to an interactive table." style="display:none;">
 
   <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 -960 960 960">
     <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
@@ -258,12 +254,12 @@ Successfully installed palmerpenguins-0.1.4</code></pre>
 
     <script>
       const buttonEl =
-        document.querySelector('#df-02e64448-8819-4f8d-b5ab-d23310bc67d0 button.colab-df-convert');
+        document.querySelector('#df-4e83c252-7354-4125-a034-6a735fdf11b1 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-02e64448-8819-4f8d-b5ab-d23310bc67d0');
+        const element = document.querySelector('#df-4e83c252-7354-4125-a034-6a735fdf11b1');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -283,8 +279,8 @@ Successfully installed palmerpenguins-0.1.4</code></pre>
   </div>
 
 
-<div id="df-d18142ee-4d01-409c-bcdb-b07ceb5744c1">
-  <button class="colab-df-quickchart" onclick="quickchart('df-d18142ee-4d01-409c-bcdb-b07ceb5744c1')" title="Suggest charts" style="display:none;">
+<div id="df-4536eaa8-8e9c-4ff6-9020-d70a6ced417d">
+  <button class="colab-df-quickchart" onclick="quickchart('df-4536eaa8-8e9c-4ff6-9020-d70a6ced417d')" title="Suggest charts" style="display:none;">
 
 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
     <g>
@@ -400,7 +396,7 @@ Successfully installed palmerpenguins-0.1.4</code></pre>
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-d18142ee-4d01-409c-bcdb-b07ceb5744c1 button');
+        document.querySelector('#df-4536eaa8-8e9c-4ff6-9020-d70a6ced417d button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
@@ -411,7 +407,7 @@ Successfully installed palmerpenguins-0.1.4</code></pre>
   </div>
 </div>
 </div>
-<div id="cell-5" class="cell" data-execution_count="20">
+<div id="cell-5" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> pd.get_dummies(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s use the other variables to predict <code>bill_depth_mm</code>. Prepare your data and fit the following models on a training dataset subset of the entire dataset:</p>
@@ -458,10 +454,10 @@ Successfully installed palmerpenguins-0.1.4</code></pre>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># training the model</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>m1 <span class="op">=</span> lr.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-16" class="cell" data-outputid="cee276f4-b97f-4e8e-a195-2201a018b4dd" data-execution_count="11">
+<div id="cell-16" class="cell" data-outputid="35dbc6c7-9246-4ac1-e79e-399d397b8eb4" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>m1.score(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
-<pre><code>0.21678323677849187</code></pre>
+<pre><code>0.24337455071002922</code></pre>
 </div>
 </div>
 <div id="cell-17" class="cell" data-execution_count="12">
@@ -482,541 +478,204 @@ Successfully installed palmerpenguins-0.1.4</code></pre>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>r2_m1_test <span class="op">=</span> r2_score(y_test, Y_test_pred_m1)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>mse_m1_test <span class="op">=</span> mean_squared_error(y_test, Y_test_pred_m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-21" class="cell" data-outputid="0bb7ac8a-75e8-4696-c24f-ab2787b83b45" data-execution_count="16">
+<div id="cell-21" class="cell" data-outputid="d07910f0-75c5-4e23-b740-6bed07486552" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"R-squared M1 train: </span><span class="sc">{</span>r2_m1_train<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MSE LR train: </span><span class="sc">{</span>mse_m1_train<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R-squared M1 train: 0.21678323677849187
-MSE LR train: 3.1112417762459965</code></pre>
+<pre><code>R-squared M1 train: 0.24337455071002922
+MSE LR train: 2.8630584160330788</code></pre>
 </div>
 </div>
-<div id="cell-22" class="cell" data-outputid="2e62bf6b-84f3-4eb5-c56e-33f98d759767" data-execution_count="17">
+<div id="cell-22" class="cell" data-outputid="36164659-dd01-41e9-8b1b-628df0bbef42" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"R-squared M1 test: </span><span class="sc">{</span>r2_m1_test<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MSE LR test: </span><span class="sc">{</span>mse_m1_test<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R-squared M1 test: 0.2452762280878522
-MSE LR test: 2.650196052923692</code></pre>
+<pre><code>R-squared M1 test: 0.1787199341114165
+MSE LR test: 3.4487155660246365</code></pre>
 </div>
 </div>
 </section>
 <section id="model-2-bill_length_mm-species" class="level2">
 <h2 class="anchored" data-anchor-id="model-2-bill_length_mm-species">Model 2: <em>bill_length_mm, species</em></h2>
-<ul>
-<li>List item</li>
-<li>List item</li>
-</ul>
 <hr>
-<div id="cell-24" class="cell" data-execution_count="22">
+<div id="cell-24" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># defining variables of the model</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>X2 <span class="op">=</span> penguins[[<span class="st">"bill_length_mm"</span>, <span class="st">"species_Adelie"</span>, <span class="st">"species_Chinstrap"</span>, <span class="st">"species_Gentoo"</span>]]</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> penguins[<span class="st">"bill_depth_mm"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-25" class="cell" data-execution_count="23">
+<div id="cell-25" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># splitting the data into train and test datasets</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X2, y, test_size<span class="op">=</span><span class="fl">0.25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-26" class="cell" data-execution_count="24">
+<div id="cell-26" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># training the model</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>m2 <span class="op">=</span> lr.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-27" class="cell" data-outputid="43df89ab-029b-4be6-cec5-7681656d1abe" data-execution_count="25">
+<div id="cell-27" class="cell" data-outputid="1819efb5-0e8c-4bbd-a9de-9e8bfac49e44" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>m2.score(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="25">
-<pre><code>0.7595053278347508</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<pre><code>0.7869869996891681</code></pre>
 </div>
 </div>
-<div id="cell-28" class="cell" data-execution_count="26">
+<div id="cell-28" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># predicting Y based on training dataset X_train</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>Y_train_pred_m2 <span class="op">=</span> m2.predict(X_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-29" class="cell" data-execution_count="27">
+<div id="cell-29" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R-squared and MSE for Y_train_pred</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>r2_m2_train <span class="op">=</span> r2_score(y_train, Y_train_pred_m2)</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>mse_m2_train <span class="op">=</span> mean_squared_error(y_train, Y_train_pred_m2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-30" class="cell" data-execution_count="28">
+<div id="cell-30" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># testing the model</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>Y_test_pred_m2 <span class="op">=</span> m2.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-31" class="cell" data-execution_count="29">
+<div id="cell-31" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R-squared and MSE for Model 2:</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>r2_m2_test <span class="op">=</span> r2_score(y_test, Y_test_pred_m2)</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>mse_m2_test <span class="op">=</span> mean_squared_error(y_test, Y_test_pred_m2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-32" class="cell" data-outputid="f868d98a-fdb3-4816-cf5a-14f9ed5529e3" data-execution_count="30">
+<div id="cell-32" class="cell" data-outputid="0ed90c7f-7180-46aa-f1b8-1d40d6c394a8" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"R-squared M2 train: </span><span class="sc">{</span>r2_m2_train<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MSE M2 train: </span><span class="sc">{</span>mse_m2_train<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R-squared M2 train: 0.7595053278347508
-MSE M2 train: 0.9377684805013499</code></pre>
+<pre><code>R-squared M2 train: 0.7869869996891681
+MSE M2 train: 0.8122885885881059</code></pre>
 </div>
 </div>
-<div id="cell-33" class="cell" data-outputid="0b99d086-4c95-4aeb-bdd6-f0a3c4a5a3e0" data-execution_count="31">
+<div id="cell-33" class="cell" data-outputid="efbe1c8a-9d62-451e-fdcb-ab894b34d981" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"R-squared M2 test: </span><span class="sc">{</span>r2_m2_test<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MSE M2 test: </span><span class="sc">{</span>mse_m2_test<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R-squared M2 test: 0.7845043177734876
-MSE M2 test: 0.8059938599375471</code></pre>
+<pre><code>R-squared M2 test: 0.7165635230871122
+MSE M2 test: 1.1649346505356488</code></pre>
 </div>
 </div>
 </section>
 <section id="model-3-interaction-bill_length-flipper-length" class="level2">
 <h2 class="anchored" data-anchor-id="model-3-interaction-bill_length-flipper-length">Model 3: interaction bill_length * flipper length</h2>
 <hr>
-<div id="cell-35" class="cell" data-execution_count="49">
+<div id="cell-35" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>penguins[<span class="st">'bl_fl'</span>] <span class="op">=</span> penguins[<span class="st">'bill_length_mm'</span>] <span class="op">*</span> penguins[<span class="st">'flipper_length_mm'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-36" class="cell" data-execution_count="50">
+<div id="cell-36" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># defining variables of the model</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>X3 <span class="op">=</span> penguins[[<span class="st">"bill_length_mm"</span>, <span class="st">"flipper_length_mm"</span>, <span class="st">"bl_fl"</span>]]</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> penguins[<span class="st">"bill_depth_mm"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-37" class="cell" data-execution_count="51">
+<div id="cell-37" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># splitting the data into train and test datasets</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X3, y, test_size<span class="op">=</span><span class="fl">0.25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-38" class="cell" data-execution_count="52">
+<div id="cell-38" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># training the model</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>m3 <span class="op">=</span> lr.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-39" class="cell" data-outputid="5806ccca-5a77-4dbc-d999-f45934533069" data-execution_count="53">
+<div id="cell-39" class="cell" data-outputid="627dbb58-de08-409e-fa80-fae088c3eff2" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>m3.score(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="53">
-<pre><code>0.3738941795886396</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="32">
+<pre><code>0.38463382829887793</code></pre>
 </div>
 </div>
-<div id="cell-40" class="cell" data-execution_count="54">
+<div id="cell-40" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># predicting Y based on training dataset X_train</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>Y_train_pred_m3 <span class="op">=</span> m3.predict(X_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-41" class="cell" data-execution_count="55">
+<div id="cell-41" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R-squared and MSE for Y_train_pred</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>r2_m3_train <span class="op">=</span> r2_score(y_train, Y_train_pred_m3)</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>mse_m3_train <span class="op">=</span> mean_squared_error(y_train, Y_train_pred_m3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-42" class="cell" data-execution_count="56">
+<div id="cell-42" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># testing the model</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>Y_test_pred_m3 <span class="op">=</span> m3.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-43" class="cell" data-execution_count="57">
+<div id="cell-43" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R-squared and MSE for Model 2:</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>r2_m3_test <span class="op">=</span> r2_score(y_test, Y_test_pred_m3)</span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>mse_m3_test <span class="op">=</span> mean_squared_error(y_test, Y_test_pred_m3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-44" class="cell" data-outputid="295c83c4-2509-4f46-9971-678ff20b262f" data-execution_count="58">
+<div id="cell-44" class="cell" data-outputid="e80d84ef-846e-4358-ce42-f72deacb0f6e" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"R-squared M3 train: </span><span class="sc">{</span>r2_m3_train<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MSE M3 train: </span><span class="sc">{</span>mse_m3_train<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R-squared M3 train: 0.3738941795886396
-MSE M3 train: 2.360730879996885</code></pre>
+<pre><code>R-squared M3 train: 0.38463382829887793
+MSE M3 train: 2.407079203708867</code></pre>
 </div>
 </div>
-<div id="cell-45" class="cell" data-outputid="23df9393-7a98-42bd-e286-e1ff771e87cf" data-execution_count="59">
+<div id="cell-45" class="cell" data-outputid="e2117fb3-8d76-4f8b-936b-4724e9ab2b5b" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"R-squared M3 test: </span><span class="sc">{</span>r2_m3_test<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MSE M3 test: </span><span class="sc">{</span>mse_m3_test<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R-squared M3 test: 0.355046168027774
-MSE M3 test: 2.586480582059456</code></pre>
+<pre><code>R-squared M3 test: 0.28705161681143665
+MSE M3 test: 2.4621897981185645</code></pre>
 </div>
 </div>
 </section>
 <section id="model-4-more-predictors-and-interaction-on-dychotomous-variable-body_mass_g-flipper_length-sex_female-sex_femalebody_mass_g" class="level2">
 <h2 class="anchored" data-anchor-id="model-4-more-predictors-and-interaction-on-dychotomous-variable-body_mass_g-flipper_length-sex_female-sex_femalebody_mass_g">Model 4: more predictors and interaction on dychotomous variable ‘body_mass_g’, ‘flipper_length’, ‘sex_female’, ‘sex_female’*‘body_mass_g’</h2>
 <hr>
-<div id="cell-47" class="cell" data-execution_count="61">
+<div id="cell-47" class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>penguins[<span class="st">'sf_bm'</span>] <span class="op">=</span> penguins[<span class="st">'sex_female'</span>] <span class="op">*</span> penguins[<span class="st">'body_mass_g'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-48" class="cell" data-outputid="7aca8d88-3589-4c8e-c39e-40406623dda1" data-execution_count="62">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>penguins.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="62">
-
-  <div id="df-9c5e3ab5-89db-4ca1-8934-6a49986cb88d" class="colab-df-container">
-    <div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">bill_length_mm</th>
-<th data-quarto-table-cell-role="th">bill_depth_mm</th>
-<th data-quarto-table-cell-role="th">flipper_length_mm</th>
-<th data-quarto-table-cell-role="th">body_mass_g</th>
-<th data-quarto-table-cell-role="th">year</th>
-<th data-quarto-table-cell-role="th">species_Adelie</th>
-<th data-quarto-table-cell-role="th">species_Chinstrap</th>
-<th data-quarto-table-cell-role="th">species_Gentoo</th>
-<th data-quarto-table-cell-role="th">island_Biscoe</th>
-<th data-quarto-table-cell-role="th">island_Dream</th>
-<th data-quarto-table-cell-role="th">island_Torgersen</th>
-<th data-quarto-table-cell-role="th">sex_female</th>
-<th data-quarto-table-cell-role="th">sex_male</th>
-<th data-quarto-table-cell-role="th">bl_fl</th>
-<th data-quarto-table-cell-role="th">bl_bm</th>
-<th data-quarto-table-cell-role="th">sf_bm</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>39.1</td>
-<td>18.7</td>
-<td>181.0</td>
-<td>3750.0</td>
-<td>2007</td>
-<td>True</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
-<td>True</td>
-<td>False</td>
-<td>True</td>
-<td>7077.1</td>
-<td>146625.0</td>
-<td>0.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>39.5</td>
-<td>17.4</td>
-<td>186.0</td>
-<td>3800.0</td>
-<td>2007</td>
-<td>True</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
-<td>True</td>
-<td>True</td>
-<td>False</td>
-<td>7347.0</td>
-<td>150100.0</td>
-<td>3800.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>40.3</td>
-<td>18.0</td>
-<td>195.0</td>
-<td>3250.0</td>
-<td>2007</td>
-<td>True</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
-<td>True</td>
-<td>True</td>
-<td>False</td>
-<td>7858.5</td>
-<td>130975.0</td>
-<td>3250.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">4</td>
-<td>36.7</td>
-<td>19.3</td>
-<td>193.0</td>
-<td>3450.0</td>
-<td>2007</td>
-<td>True</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
-<td>True</td>
-<td>True</td>
-<td>False</td>
-<td>7083.1</td>
-<td>126615.0</td>
-<td>3450.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">5</td>
-<td>39.3</td>
-<td>20.6</td>
-<td>190.0</td>
-<td>3650.0</td>
-<td>2007</td>
-<td>True</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
-<td>True</td>
-<td>False</td>
-<td>True</td>
-<td>7467.0</td>
-<td>143445.0</td>
-<td>0.0</td>
-</tr>
-</tbody>
-</table>
-
+<div id="cell-48" class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># penguins.head()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-    <div class="colab-df-buttons">
-
-  <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-9c5e3ab5-89db-4ca1-8934-6a49986cb88d')" title="Convert this dataframe to an interactive table." style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 -960 960 960">
-    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
-  </svg>
-    </button>
-
-  <style>
-    .colab-df-container {
-      display:flex;
-      gap: 12px;
-    }
-
-    .colab-df-convert {
-      background-color: #E8F0FE;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: none;
-      fill: #1967D2;
-      height: 32px;
-      padding: 0 0 0 0;
-      width: 32px;
-    }
-
-    .colab-df-convert:hover {
-      background-color: #E2EBFA;
-      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-      fill: #174EA6;
-    }
-
-    .colab-df-buttons div {
-      margin-bottom: 4px;
-    }
-
-    [theme=dark] .colab-df-convert {
-      background-color: #3B4455;
-      fill: #D2E3FC;
-    }
-
-    [theme=dark] .colab-df-convert:hover {
-      background-color: #434B5C;
-      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-      fill: #FFFFFF;
-    }
-  </style>
-
-    <script>
-      const buttonEl =
-        document.querySelector('#df-9c5e3ab5-89db-4ca1-8934-6a49986cb88d button.colab-df-convert');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      async function convertToInteractive(key) {
-        const element = document.querySelector('#df-9c5e3ab5-89db-4ca1-8934-6a49986cb88d');
-        const dataTable =
-          await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                    [key], {});
-        if (!dataTable) return;
-
-        const docLinkHtml = 'Like what you see? Visit the ' +
-          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-          + ' to learn more about interactive tables.';
-        element.innerHTML = '';
-        dataTable['output_type'] = 'display_data';
-        await google.colab.output.renderOutput(dataTable, element);
-        const docLink = document.createElement('div');
-        docLink.innerHTML = docLinkHtml;
-        element.appendChild(docLink);
-      }
-    </script>
-  </div>
-
-
-<div id="df-377e5d4c-ee03-4984-bda3-0c9e0c6d8a52">
-  <button class="colab-df-quickchart" onclick="quickchart('df-377e5d4c-ee03-4984-bda3-0c9e0c6d8a52')" title="Suggest charts" style="display:none;">
-
-<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
-    <g>
-        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path>
-    </g>
-</svg>
-  </button>
-
-<style>
-  .colab-df-quickchart {
-      --bg-color: #E8F0FE;
-      --fill-color: #1967D2;
-      --hover-bg-color: #E2EBFA;
-      --hover-fill-color: #174EA6;
-      --disabled-fill-color: #AAA;
-      --disabled-bg-color: #DDD;
-  }
-
-  [theme=dark] .colab-df-quickchart {
-      --bg-color: #3B4455;
-      --fill-color: #D2E3FC;
-      --hover-bg-color: #434B5C;
-      --hover-fill-color: #FFFFFF;
-      --disabled-bg-color: #3B4455;
-      --disabled-fill-color: #666;
-  }
-
-  .colab-df-quickchart {
-    background-color: var(--bg-color);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: none;
-    fill: var(--fill-color);
-    height: 32px;
-    padding: 0;
-    width: 32px;
-  }
-
-  .colab-df-quickchart:hover {
-    background-color: var(--hover-bg-color);
-    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
-    fill: var(--button-hover-fill-color);
-  }
-
-  .colab-df-quickchart-complete:disabled,
-  .colab-df-quickchart-complete:disabled:hover {
-    background-color: var(--disabled-bg-color);
-    fill: var(--disabled-fill-color);
-    box-shadow: none;
-  }
-
-  .colab-df-spinner {
-    border: 2px solid var(--fill-color);
-    border-color: transparent;
-    border-bottom-color: var(--fill-color);
-    animation:
-      spin 1s steps(1) infinite;
-  }
-
-  @keyframes spin {
-    0% {
-      border-color: transparent;
-      border-bottom-color: var(--fill-color);
-      border-left-color: var(--fill-color);
-    }
-    20% {
-      border-color: transparent;
-      border-left-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-    }
-    30% {
-      border-color: transparent;
-      border-left-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-      border-right-color: var(--fill-color);
-    }
-    40% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-    }
-    60% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-    }
-    80% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-      border-bottom-color: var(--fill-color);
-    }
-    90% {
-      border-color: transparent;
-      border-bottom-color: var(--fill-color);
-    }
-  }
-</style>
-
-  <script>
-    async function quickchart(key) {
-      const quickchartButtonEl =
-        document.querySelector('#' + key + ' button');
-      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
-      quickchartButtonEl.classList.add('colab-df-spinner');
-      try {
-        const charts = await google.colab.kernel.invokeFunction(
-            'suggestCharts', [key], {});
-      } catch (error) {
-        console.error('Error during call to suggestCharts:', error);
-      }
-      quickchartButtonEl.classList.remove('colab-df-spinner');
-      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
-    }
-    (() => {
-      let quickchartButtonEl =
-        document.querySelector('#df-377e5d4c-ee03-4984-bda3-0c9e0c6d8a52 button');
-      quickchartButtonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-    })();
-  </script>
-</div>
-
-    </div>
-  </div>
-</div>
-</div>
-<div id="cell-49" class="cell" data-execution_count="63">
+<div id="cell-49" class="cell" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># defining variables of the model</span></span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>X4 <span class="op">=</span> penguins[[<span class="st">"body_mass_g"</span>, <span class="st">"flipper_length_mm"</span>, <span class="st">"sex_female"</span>, <span class="st">"sf_bm"</span>]]</span>
 <span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> penguins[<span class="st">"bill_depth_mm"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-50" class="cell" data-execution_count="64">
+<div id="cell-50" class="cell" data-execution_count="44">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># splitting the data into train and test datasets</span></span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X4, y, test_size<span class="op">=</span><span class="fl">0.25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-51" class="cell" data-execution_count="65">
+<div id="cell-51" class="cell" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># training the model</span></span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>m4 <span class="op">=</span> lr.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-52" class="cell" data-outputid="dbe5d4ac-cc5a-4bc9-d8e6-b625a7bb0c7c" data-execution_count="66">
+<div id="cell-52" class="cell" data-outputid="5eb4ac0f-4679-4239-d527-6ddd3db2f79f" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>m4.score(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="66">
-<pre><code>0.6435080169760061</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="46">
+<pre><code>0.62872288269883</code></pre>
 </div>
 </div>
-<div id="cell-53" class="cell" data-execution_count="67">
+<div id="cell-53" class="cell" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># predicting Y based on training dataset X_train</span></span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>Y_train_pred_m4 <span class="op">=</span> m4.predict(X_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-54" class="cell" data-execution_count="68">
+<div id="cell-54" class="cell" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R-squared and MSE for Y_train_pred</span></span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>r2_m4_train <span class="op">=</span> r2_score(y_train, Y_train_pred_m4)</span>
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>mse_m4_train <span class="op">=</span> mean_squared_error(y_train, Y_train_pred_m4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-55" class="cell" data-execution_count="69">
+<div id="cell-55" class="cell" data-execution_count="49">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># testing the model</span></span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>Y_test_pred_m4 <span class="op">=</span> m4.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-56" class="cell" data-execution_count="70">
+<div id="cell-56" class="cell" data-execution_count="50">
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R-squared and MSE for Model 2:</span></span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>r2_m4_test <span class="op">=</span> r2_score(y_test, Y_test_pred_m4)</span>
 <span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>mse_m4_test <span class="op">=</span> mean_squared_error(y_test, Y_test_pred_m4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-57" class="cell" data-outputid="7ac57b3a-f1d3-4eac-d93f-cd68bcb7c071" data-execution_count="71">
+<div id="cell-57" class="cell" data-outputid="0d653792-7d4d-4548-dfa0-8bacc5f4180a" data-execution_count="51">
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"R-squared M4 train: </span><span class="sc">{</span>r2_m4_train<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MSE M4 train: </span><span class="sc">{</span>mse_m4_train<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R-squared M4 train: 0.6435080169760061
-MSE M4 train: 1.3449199819985747</code></pre>
+<pre><code>R-squared M4 train: 0.62872288269883
+MSE M4 train: 1.36233769331737</code></pre>
 </div>
 </div>
-<div id="cell-58" class="cell" data-outputid="9e553c92-7f03-42f6-fcc5-5cde2a0d9beb" data-execution_count="72">
+<div id="cell-58" class="cell" data-outputid="73e17ea1-1e4b-43f8-a477-6d6ca75cf092" data-execution_count="52">
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"R-squared M4 test: </span><span class="sc">{</span>r2_m4_test<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MSE M4 test: </span><span class="sc">{</span>mse_m4_test<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R-squared M4 test: 0.6892821379792076
-MSE M4 test: 1.2813249853071518</code></pre>
+<pre><code>R-squared M4 test: 0.5911497292474592
+MSE M4 test: 1.749764176592215</code></pre>
 </div>
 </div>
 <p>Summarizing four models results into dataframes</p>
-<div id="cell-60" class="cell" data-outputid="6afb121d-33f8-475f-bd25-5ec75bb4ddae" data-execution_count="95">
+<div id="cell-60" class="cell" data-outputid="523ebb94-622a-4859-878f-eff78f3f6b71" data-execution_count="53">
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>r_squared_results <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Model"</span>: [<span class="st">"Model 1"</span>, <span class="st">"Model 1"</span>, <span class="st">"Model 2"</span>, <span class="st">"Model 2"</span>, <span class="st">"Model 3"</span>, <span class="st">"Model 3"</span>, <span class="st">"Model 4"</span>, <span class="st">"Model 4"</span>],</span>
 <span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Dataset"</span>: [<span class="st">"Train"</span>, <span class="st">"Test"</span>, <span class="st">"Train"</span>, <span class="st">"Test"</span>, <span class="st">"Train"</span>, <span class="st">"Test"</span>, <span class="st">"Train"</span>, <span class="st">"Test"</span>],</span>
@@ -1025,17 +684,17 @@ MSE M4 test: 1.2813249853071518</code></pre>
 <span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(r_squared_results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Model Dataset  R-squared
-0  Model 1   Train   0.216783
-1  Model 1    Test   0.245276
-2  Model 2   Train   0.759505
-3  Model 2    Test   0.784504
-4  Model 3   Train   0.373894
-5  Model 3    Test   0.355046
-6  Model 4   Train   0.643508
-7  Model 4    Test   0.689282</code></pre>
+0  Model 1   Train   0.243375
+1  Model 1    Test   0.178720
+2  Model 2   Train   0.786987
+3  Model 2    Test   0.716564
+4  Model 3   Train   0.384634
+5  Model 3    Test   0.287052
+6  Model 4   Train   0.628723
+7  Model 4    Test   0.591150</code></pre>
 </div>
 </div>
-<div id="cell-61" class="cell" data-outputid="03d5a1f0-3edb-4c44-c9a9-e9f1bcc21c4d" data-execution_count="94">
+<div id="cell-61" class="cell" data-outputid="caca2a1d-a4e8-4320-865a-a2d0e9ca4820" data-execution_count="54">
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>mse_results <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Model"</span>: [<span class="st">"Model 1"</span>, <span class="st">"Model 1"</span>, <span class="st">"Model 2"</span>, <span class="st">"Model 2"</span>, <span class="st">"Model 3"</span>, <span class="st">"Model 3"</span>, <span class="st">"Model 4"</span>, <span class="st">"Model 4"</span>],</span>
 <span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Dataset"</span>: [<span class="st">"Train"</span>, <span class="st">"Test"</span>, <span class="st">"Train"</span>, <span class="st">"Test"</span>, <span class="st">"Train"</span>, <span class="st">"Test"</span>, <span class="st">"Train"</span>, <span class="st">"Test"</span>],</span>
@@ -1044,25 +703,25 @@ MSE M4 test: 1.2813249853071518</code></pre>
 <span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mse_results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Model Dataset       MSE
-0  Model 1   Train  3.111242
-1  Model 1    Test  2.650196
-2  Model 2   Train  0.937768
-3  Model 2    Test  0.805994
-4  Model 3   Train  2.360731
-5  Model 3    Test  2.586481
-6  Model 4   Train  1.344920
-7  Model 4    Test  1.281325</code></pre>
+0  Model 1   Train  2.863058
+1  Model 1    Test  3.448716
+2  Model 2   Train  0.812289
+3  Model 2    Test  1.164935
+4  Model 3   Train  2.407079
+5  Model 3    Test  2.462190
+6  Model 4   Train  1.362338
+7  Model 4    Test  1.749764</code></pre>
 </div>
 </div>
 </section>
 <section id="plotting-of-models-results" class="level2">
 <h2 class="anchored" data-anchor-id="plotting-of-models-results">Plotting of models results</h2>
 <hr>
-<div id="cell-63" class="cell" data-execution_count="92">
+<div id="cell-63" class="cell" data-execution_count="55">
 <div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualziation of the results # assisted with ChatGPT</span></span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> ggplot, aes, geom_point, geom_line, labs, theme_minimal, scale_color_manual, facet_wrap</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-64" class="cell" data-outputid="e62fae12-0ece-4f33-ccce-dd312ec7ce98" data-execution_count="128">
+<div id="cell-64" class="cell" data-outputid="a976df3e-14c7-4465-f1db-280baf677141" data-execution_count="56">
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot of Train &amp; Test R-squared for each Model</span></span>
 <span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>(ggplot(r_squared_results, aes(x<span class="op">=</span><span class="st">'Model'</span>, y<span class="op">=</span><span class="st">'R-squared'</span>, color<span class="op">=</span><span class="st">'Dataset'</span>, shape<span class="op">=</span><span class="st">'Dataset'</span>))</span>
 <span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point(aes(group<span class="op">=</span><span class="st">'Model'</span>),size<span class="op">=</span><span class="dv">3</span>)</span>
@@ -1079,7 +738,7 @@ MSE M4 test: 1.2813249853071518</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-65" class="cell" data-outputid="831207c4-163f-47aa-c01a-709efb1517f5" data-execution_count="129">
+<div id="cell-65" class="cell" data-outputid="97993c37-5763-4c12-eb55-4503509a7b40" data-execution_count="57">
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># MSE Plot</span></span>
 <span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>(ggplot(mse_results, aes(x<span class="op">=</span><span class="st">'Model'</span>, y<span class="op">=</span><span class="st">'MSE'</span>, color<span class="op">=</span><span class="st">'Dataset'</span>, shape<span class="op">=</span><span class="st">'Dataset'</span>))</span>
 <span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point(aes(group<span class="op">=</span><span class="st">'Dataset'</span>),size<span class="op">=</span><span class="dv">3</span>)</span>
