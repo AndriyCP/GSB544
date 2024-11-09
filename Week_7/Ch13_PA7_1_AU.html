@@ -3121,13 +3121,13 @@ vertical-align: -.125em;
 
 
 <p>From coursebook: Ch 13</p>
-<div id="cell-2" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="61">
+<div id="cell-2" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler, OneHotEncoder, PolynomialFeatures</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split, cross_val_score</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split, cross_val_score, GridSearchCV</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score, mean_squared_error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-3" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="2">
@@ -3149,7 +3149,7 @@ vertical-align: -.125em;
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>lr_fitted <span class="op">=</span> lr.fit(X_train_s, y_train)</span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>lr_fitted.coef_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<pre><code>array([ 71669.19207639, -17709.73682042])</code></pre>
+<pre><code>array([ 71727.5698733 , -19400.88589971])</code></pre>
 </div>
 </div>
 <div id="cell-4" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="3">
@@ -3157,14 +3157,14 @@ vertical-align: -.125em;
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>r2_score(y_test, y_preds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<pre><code>-2068715.2838655699</code></pre>
+<pre><code>-2041426.2152879094</code></pre>
 </div>
 </div>
 <div id="cell-5" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>y_preds[<span class="dv">1</span>:<span class="dv">5</span>]</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the estimates are made based on non standardized values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<pre><code>array([8.22077281e+07, 1.07291945e+08, 1.33720167e+08, 1.07847589e+08])</code></pre>
+<pre><code>array([8.61165890e+07, 1.01792001e+08, 1.23864692e+08, 9.94055903e+07])</code></pre>
 </div>
 </div>
 <div id="cell-6" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="5">
@@ -3233,7 +3233,7 @@ vertical-align: -.125em;
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>r2_score(y_test, y_preds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<pre><code>0.4831575095213865</code></pre>
+<pre><code>0.48925953696804303</code></pre>
 </div>
 </div>
 <div id="cell-9" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="8">
@@ -3242,7 +3242,7 @@ vertical-align: -.125em;
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>new_house_s <span class="op">=</span> (new_house <span class="op">-</span> X_train.mean())<span class="op">/</span>X_train.std()</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>lr_fitted.predict(new_house_s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<pre><code>array([100545.94549199])</code></pre>
+<pre><code>array([97249.34960767])</code></pre>
 </div>
 </div>
 <p>we used X_train.mean() and X_train.std() in each case: we “learned” our estimates for the mean and sd of the columns when we fit the model, and we use those for all future predictions</p>
@@ -3605,13 +3605,13 @@ display: block;
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>y_preds <span class="op">=</span> lr_pipeline_fitted.predict(X_test)</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>r2_score(y_test, y_preds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<pre><code>0.4831575095213865</code></pre>
+<pre><code>0.48925953696804314</code></pre>
 </div>
 </div>
 <div id="cell-14" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>lr_pipeline_fitted.predict(new_house)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<pre><code>array([100545.94549199])</code></pre>
+<pre><code>array([97249.34960767])</code></pre>
 </div>
 </div>
 <div id="cell-15" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="12">
@@ -4898,34 +4898,34 @@ display: block;
 Name: SalePrice, dtype: int64</code></pre>
 </div>
 </div>
-<div id="cell-20" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="18">
+<div id="cell-20" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 13.2.3.1 Checking preprocessing</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>ct_fitted <span class="op">=</span> ct.fit(X_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-21" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="21">
+<div id="cell-21" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>ct.transform(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<pre><code>array([[ 1.        ,  0.        ,  0.        , ...,  0.        , -0.89787307, -0.27028754],
-       [ 1.        ,  0.        ,  0.        , ...,  0.        ,  0.69979962,  0.37237666],
-       [ 0.        ,  1.        ,  0.        , ...,  0.        , -1.15838531, -0.91295174],
+<pre><code>array([[ 1.        ,  0.        ,  0.        , ...,  0.        , -1.11201015, -1.5634701 ],
+       [ 1.        ,  0.        ,  0.        , ...,  0.        ,  0.13230212, -0.91949863],
+       [ 1.        ,  0.        ,  0.        , ...,  0.        ,  0.9312185 ,  1.01241577],
        ...,
-       [ 0.        ,  1.        ,  0.        , ...,  0.        , -0.88973206, -0.91295174],
-       [ 1.        ,  0.        ,  0.        , ...,  0.        ,  0.52273271,  1.01504086],
-       [ 1.        ,  0.        ,  0.        , ...,  0.        , -0.58851479, -0.27028754]])</code></pre>
+       [ 1.        ,  0.        ,  0.        , ...,  0.        , -0.39298541, -0.27552716],
+       [ 1.        ,  0.        ,  0.        , ...,  0.        ,  1.18886904,  2.30035871],
+       [ 1.        ,  0.        ,  0.        , ...,  0.        , -0.07341885,  1.01241577]])</code></pre>
 </div>
 </div>
-<div id="cell-22" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="22">
+<div id="cell-22" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 13.2.4 Challenges of pipelines</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 13.2.4.1 Extracting information</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># to extract model coef from a pipeline, refer to a specific step of the pipeline:</span></span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>lr_pipeline_fitted.named_steps[<span class="st">&#39;linear_regression&#39;</span>].coef_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<pre><code>array([ 71652.87952535, -17705.70592545])</code></pre>
+<pre><code>array([ 71711.24403495, -19396.47008404])</code></pre>
 </div>
 </div>
-<div id="cell-23" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="23">
+<div id="cell-23" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 13.2.4.2 Pandas input, numpy output:</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Pipelines can take input and process inputs in pandas &#39;df&#39; objects, but the outputs would be in numpy &#39;arrays&#39;.</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -4957,54 +4957,54 @@ Name: SalePrice, dtype: int64</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">26</td>
+<td data-quarto-table-cell-role="th">95</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
 <td>1.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>-1.243866</td>
-<td>-1.555616</td>
+<td>-0.584725</td>
+<td>-1.563470</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">2655</td>
+<td data-quarto-table-cell-role="th">76</td>
 <td>1.0</td>
 <td>0.0</td>
 <td>0.0</td>
 <td>0.0</td>
 <td>0.0</td>
-<td>-0.671960</td>
-<td>-0.270288</td>
+<td>0.703527</td>
+<td>1.012416</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2302</td>
+<td data-quarto-table-cell-role="th">857</td>
 <td>1.0</td>
 <td>0.0</td>
 <td>0.0</td>
 <td>0.0</td>
 <td>0.0</td>
-<td>-1.378193</td>
-<td>-1.555616</td>
+<td>-0.448910</td>
+<td>-0.919499</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1871</td>
+<td data-quarto-table-cell-role="th">922</td>
 <td>1.0</td>
 <td>0.0</td>
 <td>0.0</td>
 <td>0.0</td>
 <td>0.0</td>
-<td>-0.814428</td>
-<td>-0.270288</td>
+<td>-0.438923</td>
+<td>-0.919499</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">75</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>0.0</td>
+<td data-quarto-table-cell-role="th">1670</td>
 <td>1.0</td>
-<td>-1.160421</td>
-<td>-0.912952</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>-1.155951</td>
+<td>-1.563470</td>
 </tr>
 </tbody>
 </table>
@@ -5015,7 +5015,7 @@ Name: SalePrice, dtype: int64</code></pre>
 <p>Notice that in this transformed dataset, the column names now have prefixes for the named steps in the column transformer.</p>
 <p>Notice also the structure of the names of the dummified variables:</p>
 <p>[step name]__[variable name]_[category]</p>
-<div id="cell-25" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="25">
+<div id="cell-25" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 13.2.4.3 Interactions and Dummies</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># to add interactions to the model specification inside a &#39;pipeline&#39;, use &#39;PolynomialFeatures() function, but keep only &#39;interaction_only=True&#39;, without squares or cubes (if not needed).</span></span>
@@ -5044,39 +5044,39 @@ Name: SalePrice, dtype: int64</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">26</td>
+<td data-quarto-table-cell-role="th">95</td>
 <td>1.0</td>
-<td>882.0</td>
+<td>1200.0</td>
 <td>4.0</td>
-<td>3528.0</td>
+<td>4800.0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">2655</td>
+<td data-quarto-table-cell-role="th">76</td>
 <td>1.0</td>
-<td>1163.0</td>
-<td>6.0</td>
-<td>6978.0</td>
+<td>1845.0</td>
+<td>8.0</td>
+<td>14760.0</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2302</td>
+<td data-quarto-table-cell-role="th">857</td>
 <td>1.0</td>
-<td>816.0</td>
-<td>4.0</td>
-<td>3264.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1871</td>
-<td>1.0</td>
-<td>1093.0</td>
-<td>6.0</td>
-<td>6558.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">75</td>
-<td>1.0</td>
-<td>923.0</td>
+<td>1268.0</td>
 <td>5.0</td>
-<td>4615.0</td>
+<td>6340.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">922</td>
+<td>1.0</td>
+<td>1273.0</td>
+<td>5.0</td>
+<td>6365.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1670</td>
+<td>1.0</td>
+<td>914.0</td>
+<td>4.0</td>
+<td>3656.0</td>
 </tr>
 </tbody>
 </table>
@@ -5084,7 +5084,7 @@ Name: SalePrice, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-26" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="26">
+<div id="cell-26" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use sequential &#39;ct&#39; steps for preprocessing &#39;dummies&#39; first</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>ct_dummies <span class="op">=</span> ColumnTransformer(</span>
@@ -5200,370 +5200,106 @@ Name: SalePrice, dtype: int64</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">26</td>
+<td data-quarto-table-cell-role="th">95</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
 <td>1.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>27</td>
-<td>527404120</td>
-<td>20</td>
-<td>RL</td>
-<td>70.0</td>
-<td>8400</td>
+<td>96</td>
+<td>533210060</td>
+<td>160</td>
+<td>FV</td>
+<td>30.0</td>
+<td>3215</td>
 <td>Pave</td>
-<td>NaN</td>
-<td>Reg</td>
-<td>Lvl</td>
-<td>AllPub</td>
-<td>Corner</td>
-<td>Gtl</td>
-<td>NAmes</td>
-<td>Norm</td>
-<td>Norm</td>
-<td>1Story</td>
-<td>4</td>
-<td>5</td>
-<td>1970</td>
-<td>1970</td>
-<td>Gable</td>
-<td>CompShg</td>
-<td>Plywood</td>
-<td>Plywood</td>
-<td>NaN</td>
-<td>0.0</td>
-<td>TA</td>
-<td>TA</td>
-<td>CBlock</td>
-<td>TA</td>
-<td>TA</td>
-<td>No</td>
-<td>ALQ</td>
-<td>804.0</td>
-<td>Rec</td>
-<td>78.0</td>
-<td>0.0</td>
-<td>882.0</td>
-<td>GasA</td>
-<td>TA</td>
-<td>Y</td>
-<td>SBrkr</td>
-<td>882</td>
-<td>0</td>
-<td>0</td>
-<td>882</td>
-<td>1.0</td>
-<td>0.0</td>
-<td>1</td>
-<td>0</td>
-<td>2</td>
-<td>1</td>
-<td>TA</td>
-<td>4</td>
-<td>Typ</td>
-<td>0</td>
-<td>NaN</td>
-<td>Attchd</td>
-<td>1970.0</td>
-<td>Fin</td>
-<td>2.0</td>
-<td>525.0</td>
-<td>TA</td>
-<td>TA</td>
-<td>Y</td>
-<td>240</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>NaN</td>
-<td>MnPrv</td>
-<td>NaN</td>
-<td>0</td>
-<td>4</td>
-<td>2010</td>
-<td>WD</td>
-<td>Normal</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">2655</td>
-<td>1.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>2656</td>
-<td>902207080</td>
-<td>20</td>
-<td>RM</td>
-<td>49.0</td>
-<td>5820</td>
 <td>Pave</td>
-<td>NaN</td>
 <td>Reg</td>
 <td>Lvl</td>
 <td>AllPub</td>
 <td>Inside</td>
 <td>Gtl</td>
-<td>OldTown</td>
+<td>Somerst</td>
 <td>Norm</td>
 <td>Norm</td>
-<td>1Story</td>
-<td>3</td>
-<td>8</td>
-<td>1955</td>
-<td>2005</td>
+<td>2Story</td>
+<td>7</td>
+<td>5</td>
+<td>2004</td>
+<td>2004</td>
 <td>Gable</td>
 <td>CompShg</td>
-<td>VinylSd</td>
-<td>VinylSd</td>
-<td>NaN</td>
-<td>0.0</td>
-<td>TA</td>
+<td>MetalSd</td>
+<td>MetalSd</td>
+<td>BrkFace</td>
+<td>120.0</td>
 <td>Gd</td>
-<td>CBlock</td>
 <td>TA</td>
+<td>PConc</td>
+<td>Gd</td>
 <td>TA</td>
-<td>No</td>
-<td>ALQ</td>
-<td>256.0</td>
+<td>Av</td>
+<td>GLQ</td>
+<td>280.0</td>
 <td>Unf</td>
 <td>0.0</td>
-<td>906.0</td>
-<td>1162.0</td>
+<td>320.0</td>
+<td>600.0</td>
 <td>GasA</td>
 <td>Ex</td>
 <td>Y</td>
 <td>SBrkr</td>
-<td>1163</td>
+<td>600</td>
+<td>600</td>
 <td>0</td>
-<td>0</td>
-<td>1163</td>
-<td>1.0</td>
-<td>0.0</td>
-<td>1</td>
-<td>0</td>
-<td>3</td>
-<td>1</td>
-<td>TA</td>
-<td>6</td>
-<td>Typ</td>
-<td>0</td>
-<td>NaN</td>
-<td>Attchd</td>
-<td>1955.0</td>
-<td>Unf</td>
-<td>1.0</td>
-<td>220.0</td>
-<td>Fa</td>
-<td>TA</td>
-<td>Y</td>
-<td>142</td>
-<td>98</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
-<td>7</td>
-<td>2006</td>
-<td>WD</td>
-<td>Normal</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2302</td>
-<td>1.0</td>
+<td>1200</td>
 <td>0.0</td>
 <td>0.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>2303</td>
-<td>923276180</td>
-<td>20</td>
-<td>RL</td>
-<td>65.0</td>
-<td>11625</td>
-<td>Pave</td>
-<td>NaN</td>
-<td>IR1</td>
-<td>Lvl</td>
-<td>AllPub</td>
-<td>Inside</td>
-<td>Gtl</td>
-<td>Mitchel</td>
-<td>Norm</td>
-<td>Norm</td>
-<td>1Story</td>
-<td>5</td>
-<td>7</td>
-<td>1983</td>
-<td>1983</td>
-<td>Gable</td>
-<td>CompShg</td>
-<td>HdBoard</td>
-<td>HdBoard</td>
-<td>NaN</td>
-<td>0.0</td>
-<td>TA</td>
-<td>TA</td>
-<td>CBlock</td>
-<td>Gd</td>
-<td>TA</td>
-<td>No</td>
-<td>ALQ</td>
-<td>596.0</td>
-<td>Unf</td>
-<td>0.0</td>
-<td>220.0</td>
-<td>816.0</td>
-<td>GasA</td>
-<td>TA</td>
-<td>Y</td>
-<td>SBrkr</td>
-<td>816</td>
-<td>0</td>
-<td>0</td>
-<td>816</td>
-<td>1.0</td>
-<td>0.0</td>
-<td>1</td>
-<td>0</td>
 <td>2</td>
 <td>1</td>
-<td>TA</td>
+<td>2</td>
+<td>1</td>
+<td>Gd</td>
 <td>4</td>
 <td>Typ</td>
 <td>0</td>
 <td>NaN</td>
-<td>Attchd</td>
-<td>1983.0</td>
-<td>Fin</td>
-<td>1.0</td>
-<td>264.0</td>
+<td>Detchd</td>
+<td>2004.0</td>
+<td>RFn</td>
+<td>2.0</td>
+<td>480.0</td>
 <td>TA</td>
 <td>TA</td>
 <td>Y</td>
-<td>330</td>
 <td>0</td>
+<td>172</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
 <td>NaN</td>
-<td>MnPrv</td>
+<td>NaN</td>
 <td>NaN</td>
 <td>0</td>
-<td>5</td>
-<td>2007</td>
-<td>WD</td>
+<td>4</td>
+<td>2010</td>
+<td>ConLD</td>
 <td>Normal</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1871</td>
+<td data-quarto-table-cell-role="th">76</td>
 <td>1.0</td>
 <td>0.0</td>
 <td>0.0</td>
 <td>0.0</td>
 <td>0.0</td>
-<td>1872</td>
-<td>534176140</td>
-<td>20</td>
+<td>77</td>
+<td>531451280</td>
+<td>60</td>
 <td>RL</td>
-<td>88.0</td>
-<td>10738</td>
-<td>Pave</td>
-<td>NaN</td>
-<td>IR1</td>
-<td>Lvl</td>
-<td>AllPub</td>
-<td>Corner</td>
-<td>Gtl</td>
-<td>NWAmes</td>
-<td>Norm</td>
-<td>Norm</td>
-<td>1Story</td>
-<td>6</td>
-<td>7</td>
-<td>1966</td>
-<td>1966</td>
-<td>Hip</td>
-<td>CompShg</td>
-<td>HdBoard</td>
-<td>HdBoard</td>
-<td>NaN</td>
-<td>0.0</td>
-<td>TA</td>
-<td>TA</td>
-<td>CBlock</td>
-<td>TA</td>
-<td>TA</td>
-<td>No</td>
-<td>ALQ</td>
-<td>792.0</td>
-<td>Unf</td>
-<td>0.0</td>
-<td>301.0</td>
-<td>1093.0</td>
-<td>GasA</td>
-<td>Gd</td>
-<td>Y</td>
-<td>SBrkr</td>
-<td>1093</td>
-<td>0</td>
-<td>0</td>
-<td>1093</td>
-<td>1.0</td>
-<td>0.0</td>
-<td>2</td>
-<td>0</td>
-<td>3</td>
-<td>1</td>
-<td>TA</td>
-<td>6</td>
-<td>Typ</td>
-<td>1</td>
-<td>Fa</td>
-<td>Attchd</td>
-<td>1966.0</td>
-<td>RFn</td>
-<td>2.0</td>
-<td>484.0</td>
-<td>TA</td>
-<td>TA</td>
-<td>Y</td>
-<td>224</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>NaN</td>
-<td>MnPrv</td>
-<td>Shed</td>
-<td>400</td>
-<td>11</td>
-<td>2007</td>
-<td>WD</td>
-<td>Normal</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">75</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>1.0</td>
-<td>76</td>
-<td>531451110</td>
-<td>120</td>
-<td>RL</td>
-<td>50.0</td>
-<td>8012</td>
+<td>70.0</td>
+<td>11218</td>
 <td>Pave</td>
 <td>NaN</td>
 <td>Reg</td>
@@ -5574,14 +5310,102 @@ Name: SalePrice, dtype: int64</code></pre>
 <td>SawyerW</td>
 <td>Norm</td>
 <td>Norm</td>
-<td>1Story</td>
+<td>2Story</td>
 <td>6</td>
 <td>5</td>
-<td>1980</td>
-<td>1980</td>
+<td>1992</td>
+<td>1992</td>
 <td>Gable</td>
 <td>CompShg</td>
-<td>Plywood</td>
+<td>Wd Sdng</td>
+<td>Wd Sdng</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>Gd</td>
+<td>TA</td>
+<td>PConc</td>
+<td>Gd</td>
+<td>TA</td>
+<td>No</td>
+<td>Unf</td>
+<td>0.0</td>
+<td>Unf</td>
+<td>0.0</td>
+<td>1055.0</td>
+<td>1055.0</td>
+<td>GasA</td>
+<td>Ex</td>
+<td>Y</td>
+<td>SBrkr</td>
+<td>1055</td>
+<td>790</td>
+<td>0</td>
+<td>1845</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>2</td>
+<td>1</td>
+<td>3</td>
+<td>1</td>
+<td>Gd</td>
+<td>8</td>
+<td>Typ</td>
+<td>1</td>
+<td>TA</td>
+<td>Attchd</td>
+<td>1992.0</td>
+<td>RFn</td>
+<td>2.0</td>
+<td>462.0</td>
+<td>TA</td>
+<td>TA</td>
+<td>Y</td>
+<td>635</td>
+<td>104</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>NaN</td>
+<td>GdPrv</td>
+<td>Shed</td>
+<td>400</td>
+<td>5</td>
+<td>2010</td>
+<td>WD</td>
+<td>Normal</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">857</td>
+<td>1.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>858</td>
+<td>907202130</td>
+<td>20</td>
+<td>RL</td>
+<td>NaN</td>
+<td>9286</td>
+<td>Pave</td>
+<td>NaN</td>
+<td>IR1</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>CulDSac</td>
+<td>Mod</td>
+<td>CollgCr</td>
+<td>Norm</td>
+<td>Norm</td>
+<td>1Story</td>
+<td>5</td>
+<td>7</td>
+<td>1977</td>
+<td>1989</td>
+<td>Gable</td>
+<td>CompShg</td>
+<td>HdBoard</td>
 <td>Plywood</td>
 <td>NaN</td>
 <td>0.0</td>
@@ -5589,53 +5413,229 @@ Name: SalePrice, dtype: int64</code></pre>
 <td>TA</td>
 <td>CBlock</td>
 <td>Gd</td>
-<td>TA</td>
-<td>No</td>
-<td>BLQ</td>
-<td>543.0</td>
-<td>BLQ</td>
-<td>119.0</td>
-<td>261.0</td>
-<td>923.0</td>
+<td>Gd</td>
+<td>Av</td>
+<td>ALQ</td>
+<td>196.0</td>
+<td>Unf</td>
+<td>0.0</td>
+<td>1072.0</td>
+<td>1268.0</td>
 <td>GasA</td>
 <td>TA</td>
 <td>Y</td>
 <td>SBrkr</td>
-<td>923</td>
+<td>1268</td>
 <td>0</td>
 <td>0</td>
+<td>1268</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>1</td>
+<td>1</td>
+<td>3</td>
+<td>1</td>
+<td>Gd</td>
+<td>5</td>
+<td>Typ</td>
+<td>0</td>
+<td>NaN</td>
+<td>Detchd</td>
+<td>1978.0</td>
+<td>Unf</td>
+<td>1.0</td>
+<td>252.0</td>
+<td>TA</td>
+<td>TA</td>
+<td>Y</td>
+<td>173</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0</td>
+<td>10</td>
+<td>2009</td>
+<td>WD</td>
+<td>Normal</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">922</td>
+<td>1.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
 <td>923</td>
+<td>909277090</td>
+<td>20</td>
+<td>RL</td>
+<td>80.0</td>
+<td>14680</td>
+<td>Pave</td>
+<td>Grvl</td>
+<td>IR1</td>
+<td>HLS</td>
+<td>AllPub</td>
+<td>Inside</td>
+<td>Gtl</td>
+<td>Crawfor</td>
+<td>Norm</td>
+<td>Norm</td>
+<td>1Story</td>
+<td>5</td>
+<td>4</td>
+<td>1960</td>
+<td>1960</td>
+<td>Gable</td>
+<td>CompShg</td>
+<td>MetalSd</td>
+<td>MetalSd</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>TA</td>
+<td>TA</td>
+<td>CBlock</td>
+<td>TA</td>
+<td>TA</td>
+<td>No</td>
+<td>Rec</td>
+<td>793.0</td>
+<td>Unf</td>
+<td>0.0</td>
+<td>480.0</td>
+<td>1273.0</td>
+<td>GasA</td>
+<td>Ex</td>
+<td>Y</td>
+<td>SBrkr</td>
+<td>1273</td>
+<td>0</td>
+<td>0</td>
+<td>1273</td>
 <td>0.0</td>
 <td>0.0</td>
-<td>2</td>
+<td>1</td>
 <td>0</td>
 <td>2</td>
 <td>1</td>
 <td>TA</td>
 <td>5</td>
 <td>Typ</td>
-<td>1</td>
-<td>TA</td>
+<td>0</td>
+<td>NaN</td>
 <td>Attchd</td>
-<td>1980.0</td>
-<td>RFn</td>
+<td>1960.0</td>
+<td>Unf</td>
 <td>1.0</td>
-<td>264.0</td>
+<td>307.0</td>
 <td>TA</td>
 <td>TA</td>
 <td>Y</td>
-<td>80</td>
+<td>483</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>115</td>
+<td>0</td>
+<td>NaN</td>
+<td>MnPrv</td>
+<td>NaN</td>
+<td>0</td>
+<td>6</td>
+<td>2009</td>
+<td>WD</td>
+<td>Normal</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1670</td>
+<td>1.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>1671</td>
+<td>527425025</td>
+<td>20</td>
+<td>RL</td>
+<td>NaN</td>
+<td>17199</td>
+<td>Pave</td>
+<td>NaN</td>
+<td>Reg</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>FR2</td>
+<td>Gtl</td>
+<td>NAmes</td>
+<td>Norm</td>
+<td>Norm</td>
+<td>1Story</td>
+<td>4</td>
+<td>7</td>
+<td>1961</td>
+<td>1961</td>
+<td>Gable</td>
+<td>CompShg</td>
+<td>MetalSd</td>
+<td>MetalSd</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>TA</td>
+<td>Gd</td>
+<td>BrkTil</td>
+<td>TA</td>
+<td>TA</td>
+<td>No</td>
+<td>ALQ</td>
+<td>314.0</td>
+<td>Unf</td>
+<td>0.0</td>
+<td>600.0</td>
+<td>914.0</td>
+<td>GasA</td>
+<td>Ex</td>
+<td>Y</td>
+<td>SBrkr</td>
+<td>914</td>
+<td>0</td>
+<td>0</td>
+<td>914</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>1</td>
+<td>0</td>
+<td>2</td>
+<td>1</td>
+<td>TA</td>
+<td>4</td>
+<td>Typ</td>
+<td>0</td>
+<td>NaN</td>
+<td>Basment</td>
+<td>1961.0</td>
+<td>Unf</td>
+<td>1.0</td>
+<td>270.0</td>
+<td>Fa</td>
+<td>TA</td>
+<td>Y</td>
+<td>140</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
 <td>NaN</td>
-<td>NaN</td>
+<td>GdWo</td>
 <td>NaN</td>
 <td>0</td>
-<td>5</td>
-<td>2010</td>
+<td>7</td>
+<td>2007</td>
 <td>WD</td>
 <td>Normal</td>
 </tr>
@@ -5645,7 +5645,7 @@ Name: SalePrice, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-27" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="27">
+<div id="cell-27" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>ct_inter.fit_transform(X_train_dummified).head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -5663,39 +5663,39 @@ Name: SalePrice, dtype: int64</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">26</td>
+<td data-quarto-table-cell-role="th">95</td>
 <td>1.0</td>
 <td>4.0</td>
-<td>1.0</td>
-<td>4.0</td>
+<td>0.0</td>
+<td>0.0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">2655</td>
+<td data-quarto-table-cell-role="th">76</td>
 <td>1.0</td>
-<td>6.0</td>
+<td>8.0</td>
 <td>1.0</td>
-<td>6.0</td>
+<td>8.0</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2302</td>
-<td>1.0</td>
-<td>4.0</td>
-<td>1.0</td>
-<td>4.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1871</td>
-<td>1.0</td>
-<td>6.0</td>
-<td>1.0</td>
-<td>6.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">75</td>
+<td data-quarto-table-cell-role="th">857</td>
 <td>1.0</td>
 <td>5.0</td>
-<td>0.0</td>
-<td>0.0</td>
+<td>1.0</td>
+<td>5.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">922</td>
+<td>1.0</td>
+<td>5.0</td>
+<td>1.0</td>
+<td>5.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1670</td>
+<td>1.0</td>
+<td>4.0</td>
+<td>1.0</td>
+<td>4.0</td>
 </tr>
 </tbody>
 </table>
@@ -5724,18 +5724,18 @@ Name: SalePrice, dtype: int64</code></pre>
 <li>.fit the pipeline on (X_train, y_train)</li>
 <li>.predict</li>
 </ol>
-<div id="cell-30" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="39">
+<div id="cell-30" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the X any variables ahead of splitting the data</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> ames.drop(<span class="st">&quot;SalePrice&quot;</span>, axis <span class="op">=</span> <span class="dv">1</span>)</span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> ames[<span class="st">&quot;SalePrice&quot;</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-31" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="40">
+<div id="cell-31" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prior step: from sklearn.model_selection use &#39;train_test_split&#39; to split the dataset to test and train</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-32" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="41">
+<div id="cell-32" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pipeline - Model 1: &#39;size and number of rooms&#39;</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>ct_1 <span class="op">=</span> ColumnTransformer(</span>
@@ -5761,7 +5761,7 @@ Name: SalePrice, dtype: int64</code></pre>
 <span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>RSQ_1 <span class="op">=</span> r2_score(y_test, y_pred_1)</span>
 <span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a>MSE_1 <span class="op">=</span> mean_squared_error(y_test, y_pred_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-33" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="43">
+<div id="cell-33" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pipeline - Model 2: [&quot;Gr Liv Area&quot;, &quot;TotRms AbvGrd&quot;, &quot;Bldg Type&quot;]</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: use &#39;ct&#39; to dummify variables from Step 1</span></span>
@@ -5789,7 +5789,7 @@ Name: SalePrice, dtype: int64</code></pre>
 <span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a>RSQ_2 <span class="op">=</span> r2_score(y_test, y_pred_2)</span>
 <span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a>MSE_2 <span class="op">=</span> mean_squared_error(y_test, y_pred_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-34" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="46">
+<div id="cell-34" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># view dummies names for next model</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>ct_2.fit_transform(X_train).head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -5810,49 +5810,49 @@ Name: SalePrice, dtype: int64</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">1113</td>
+<td data-quarto-table-cell-role="th">1947</td>
 <td>0.0</td>
 <td>0.0</td>
 <td>0.0</td>
 <td>0.0</td>
-<td>0.141383</td>
-<td>0.338448</td>
+<td>-1.219074</td>
+<td>-1.553967</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">861</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>-1.441841</td>
-<td>-0.916524</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2067</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>-0.398086</td>
-<td>-0.289038</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">609</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>1.239867</td>
-<td>0.338448</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1411</td>
-<td>0.0</td>
+<td data-quarto-table-cell-role="th">1993</td>
 <td>1.0</td>
 <td>0.0</td>
 <td>0.0</td>
-<td>-1.254199</td>
-<td>-1.544010</td>
+<td>0.0</td>
+<td>1.621505</td>
+<td>2.251419</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2098</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.282236</td>
+<td>0.348726</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>-0.322974</td>
+<td>-0.919736</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2319</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.575079</td>
+<td>0.982957</td>
 </tr>
 </tbody>
 </table>
@@ -5860,7 +5860,7 @@ Name: SalePrice, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-35" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="47">
+<div id="cell-35" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pipeline - Model 3: &#39;size&#39;, dummified &#39;building type&#39; and their interactions</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: use &#39;ct&#39; to dummify variables from Step 1</span></span>
@@ -5901,7 +5901,7 @@ Name: SalePrice, dtype: int64</code></pre>
 <span id="cb39-38"><a href="#cb39-38" aria-hidden="true" tabindex="-1"></a>RSQ_3 <span class="op">=</span> r2_score(y_test, y_pred_3)</span>
 <span id="cb39-39"><a href="#cb39-39" aria-hidden="true" tabindex="-1"></a>MSE_3 <span class="op">=</span> mean_squared_error(y_test, y_pred_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-36" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="49">
+<div id="cell-36" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Pipeline - Model 4: using a 5-degree polynomial on size &quot;Gr Liv Area&quot;, a 5-degree polynomial on number of rooms &quot;TotRms AbvGrd&quot;, and also building type.</span></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co"># standardize__Gr Liv Area</span></span>
@@ -5943,40 +5943,40 @@ Name: SalePrice, dtype: int64</code></pre>
 <span id="cb40-39"><a href="#cb40-39" aria-hidden="true" tabindex="-1"></a>RSQ_4 <span class="op">=</span> r2_score(y_test, y_pred_4)</span>
 <span id="cb40-40"><a href="#cb40-40" aria-hidden="true" tabindex="-1"></a>MSE_4 <span class="op">=</span> mean_squared_error(y_test, y_pred_4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-37" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="50">
+<div id="cell-37" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(RSQ_1), <span class="bu">print</span>(MSE_1)</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(RSQ_2), <span class="bu">print</span>(MSE_2)</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(RSQ_3), <span class="bu">print</span>(MSE_3)</span>
 <span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(RSQ_4), <span class="bu">print</span>(MSE_4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.5052968412023751
-3333931304.9644423
-0.5362781039657544
-3125140639.3758006
-0.5415228154554863
-3089795185.217751
-0.4839520045551803
-3477779626.5931025
-0.5052968412023751
-3333931304.9644423
-0.5362781039657544
-3125140639.3758006
-0.5415228154554863
-3089795185.217751
-0.4839520045551803
-3477779626.5931025</code></pre>
+<pre><code>0.5514349030200313
+2984166334.6128507
+0.5669434873753496
+2880992468.339632
+0.5790796096295492
+2800254560.491787
+0.5622300397325329
+2912349593.2482653
+0.5514349030200313
+2984166334.6128507
+0.5669434873753496
+2880992468.339632
+0.5790796096295492
+2800254560.491787
+0.5622300397325329
+2912349593.2482653</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <pre><code>(None, None)</code></pre>
 </div>
 </div>
 <p>Answer 13.2.5: Model 3 works best, whith highest R-squared and lowest MSE</p>
-<div id="cell-39" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="62">
+<div id="cell-39" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 13.3 Cross-Validation</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-40" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="70">
+<div id="cell-40" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PA 13.3.1 cross_val_score</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>m1_score_r2 <span class="op">=</span> (cross_val_score(lr_pipe_1, X, y, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">&#39;r2&#39;</span>)).mean()</span>
@@ -5991,7 +5991,7 @@ Name: SalePrice, dtype: int64</code></pre>
 <span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>m4_score_r2 <span class="op">=</span> (cross_val_score(lr_pipe_4, X, y, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">&#39;r2&#39;</span>)).mean()</span>
 <span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>m4_score_mse <span class="op">=</span> (cross_val_score(lr_pipe_4, X, y, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span>(<span class="st">&#39;neg_mean_squared_error&#39;</span>))<span class="op">*-</span><span class="dv">1</span>).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-41" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="71">
+<div id="cell-41" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print the resuls</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Model 1:&quot;</span>)</span>
@@ -6037,6 +6037,613 @@ Model 4:
 </div>
 </div>
 <p>Answer 13.3 Cross-Validation: Model 3 still has the lowest MSE and the highest R-squared of all four models.</p>
+</section>
+<section id="tuning" class="level2">
+<h2 class="anchored" data-anchor-id="tuning">13.3.2 Tuning</h2>
+<p>from sklearn.model_selection import GridSearchCV</p>
+<p>The name of the list of numbers in our dictionary object was preprocessing__polynomial__degree. This follows the pattern</p>
+<p>[name of step in pipeline]<strong>[name of step in column transformer]</strong>[name of argument to function]</p>
+<div id="cell-44" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="56">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># from sklearn.model_selection import GridSearchCV</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>ct_poly <span class="op">=</span> ColumnTransformer(</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  [</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;dummify&quot;</span>, OneHotEncoder(sparse_output <span class="op">=</span> <span class="va">False</span>), [<span class="st">&quot;Bldg Type&quot;</span>]),</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;polynomial&quot;</span>, PolynomialFeatures(), [<span class="st">&quot;Gr Liv Area&quot;</span>])</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>  ],</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>  remainder <span class="op">=</span> <span class="st">&quot;drop&quot;</span></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>lr_pipeline_poly <span class="op">=</span> Pipeline(</span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>  [(<span class="st">&quot;preprocessing&quot;</span>, ct_poly),</span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>  (<span class="st">&quot;linear_regression&quot;</span>, LinearRegression())]</span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>).set_output(transform<span class="op">=</span><span class="st">&quot;pandas&quot;</span>)</span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a>degrees <span class="op">=</span> {<span class="st">&#39;preprocessing__polynomial__degree&#39;</span>: np.arange(<span class="dv">1</span>, <span class="dv">10</span>)}</span>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a>gscv <span class="op">=</span> GridSearchCV(lr_pipeline_poly, degrees, cv <span class="op">=</span> <span class="dv">5</span>, scoring<span class="op">=</span><span class="st">&#39;r2&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-45" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="57">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>gscv_fitted <span class="op">=</span> gscv.fit(X, y)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>gscv_fitted.cv_results_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>{&#39;mean_fit_time&#39;: array([0.00639687, 0.00559564, 0.00559549, 0.0053515 , 0.00558548, 0.00580101, 0.00589299, 0.00652719, 0.00644774]),
+ &#39;std_fit_time&#39;: array([1.33169683e-03, 1.67617479e-04, 2.23595009e-04, 9.15720293e-05, 2.04445309e-04, 1.95599707e-04, 1.99804329e-04,
+        4.68625263e-04, 2.91668992e-04]),
+ &#39;mean_score_time&#39;: array([0.00273161, 0.00247159, 0.00252275, 0.00236421, 0.00265636, 0.00248404, 0.00260258, 0.00288215, 0.00300798]),
+ &#39;std_score_time&#39;: array([4.14656929e-04, 1.13539684e-04, 2.38580239e-04, 2.60696953e-05, 2.74687905e-04, 8.48329891e-05, 2.47073071e-04,
+        1.42204849e-04, 1.79688894e-04]),
+ &#39;param_preprocessing__polynomial__degree&#39;: masked_array(data=[1, 2, 3, 4, 5, 6, 7, 8, 9],
+              mask=[False, False, False, False, False, False, False, False, False],
+        fill_value=999999),
+ &#39;params&#39;: [{&#39;preprocessing__polynomial__degree&#39;: np.int64(1)},
+  {&#39;preprocessing__polynomial__degree&#39;: np.int64(2)},
+  {&#39;preprocessing__polynomial__degree&#39;: np.int64(3)},
+  {&#39;preprocessing__polynomial__degree&#39;: np.int64(4)},
+  {&#39;preprocessing__polynomial__degree&#39;: np.int64(5)},
+  {&#39;preprocessing__polynomial__degree&#39;: np.int64(6)},
+  {&#39;preprocessing__polynomial__degree&#39;: np.int64(7)},
+  {&#39;preprocessing__polynomial__degree&#39;: np.int64(8)},
+  {&#39;preprocessing__polynomial__degree&#39;: np.int64(9)}],
+ &#39;split0_test_score&#39;: array([0.53667199, 0.53861812, 0.5515541 , 0.5500662 , 0.50847886, 0.50803388, 0.50404864, 0.48824759, 0.45353318]),
+ &#39;split1_test_score&#39;: array([0.52379929, 0.51739889, 0.52489523, 0.52532686, 0.45451042, 0.45231332, 0.44389116, 0.42226201, 0.38464168]),
+ &#39;split2_test_score&#39;: array([  0.43205901,   0.44999102,   0.50538576,   0.44986548,   0.1733882 ,  -0.39418508,  -1.67096397,  -4.78706751,
+        -12.6045606 ]),
+ &#39;split3_test_score&#39;: array([  0.56266573,   0.57574172,   0.58653707,   0.59201455,   0.54742275,   0.5327313 ,   0.31370339,  -1.49591502,
+        -11.46560455]),
+ &#39;split4_test_score&#39;: array([0.59424739, 0.57528078, 0.58780969, 0.59305393, 0.57550038, 0.5702938 , 0.55592936, 0.53199329, 0.50402514]),
+ &#39;mean_test_score&#39;: array([ 0.52988868,  0.5314061 ,  0.55123637,  0.5420654 ,  0.45186012,  0.33383744,  0.02932172, -0.96809593, -4.54559303]),
+ &#39;std_test_score&#39;: array([0.05453461, 0.04640531, 0.03280239, 0.05280107, 0.14503685, 0.36602407, 0.85397815, 2.05754399, 6.1258573 ]),
+ &#39;rank_test_score&#39;: array([4, 3, 1, 2, 5, 6, 7, 8, 9], dtype=int32)}</code></pre>
+</div>
+</div>
+<div id="cell-46" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="58">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filtering results for the metric of interest for all of the models</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>gscv_fitted.cv_results_[<span class="st">&#39;mean_test_score&#39;</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>array([ 0.52988868,  0.5314061 ,  0.55123637,  0.5420654 ,  0.45186012,  0.33383744,  0.02932172, -0.96809593, -4.54559303])</code></pre>
+</div>
+</div>
+<div id="cell-47" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="59">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creating a dataframe with the results</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(data <span class="op">=</span> {<span class="st">&quot;degrees&quot;</span>: np.arange(<span class="dv">1</span>, <span class="dv">10</span>), <span class="st">&quot;R2 mean scores&quot;</span>: gscv_fitted.cv_results_[<span class="st">&#39;mean_test_score&#39;</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">degrees</th>
+<th data-quarto-table-cell-role="th">R2 mean scores</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>0.529889</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>0.531406</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>0.551236</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>4</td>
+<td>0.542065</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>5</td>
+<td>0.451860</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>6</td>
+<td>0.333837</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>7</td>
+<td>0.029322</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>8</td>
+<td>-0.968096</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>9</td>
+<td>-4.545593</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="cell-48" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many different model fitting steps occurred when gscv.fit(X, y) was run?</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>cv<span class="op">=</span><span class="dv">5</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>poly<span class="op">=</span><span class="dv">9</span></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>cv<span class="op">*</span>poly</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>45</code></pre>
+</div>
+</div>
+</section>
+<section id="your-turn-1" class="level2">
+<h2 class="anchored" data-anchor-id="your-turn-1">13.3.3 Your Turn</h2>
+<p>Consider one hundred modeling options for house price:</p>
+<ul>
+<li>House size, trying degrees 1 through 10</li>
+<li>Number of rooms, trying degrees 1 through 10</li>
+<li>Building Type</li>
+</ul>
+<p>Hint: The dictionary of possible values that you make to give to GridSearchCV will have two elements instead of one.</p>
+<p>Q1: Which model performed the best?</p>
+<p>Q2: What downsides do you see of trying all possible model options? How might you go about choosing a smaller number of tuning values to try?</p>
+<div id="cell-50" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="60">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># from sklearn.model_selection import GridSearchCV # assisted by ChatGPT</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>ct_poly <span class="op">=</span> ColumnTransformer(</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>  [</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;dummify&quot;</span>, OneHotEncoder(sparse_output <span class="op">=</span> <span class="va">False</span>), [<span class="st">&quot;Bldg Type&quot;</span>]),</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;polynomial_area&quot;</span>, PolynomialFeatures(), [<span class="st">&quot;Gr Liv Area&quot;</span>]), </span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;polynomial_rooms&quot;</span>, PolynomialFeatures(), [<span class="st">&quot;TotRms AbvGrd&quot;</span>])</span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>  ],</span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>  remainder <span class="op">=</span> <span class="st">&quot;drop&quot;</span></span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a>lr_pipeline_poly <span class="op">=</span> Pipeline(</span>
+<span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a>  [(<span class="st">&quot;preprocessing&quot;</span>, ct_poly),</span>
+<span id="cb56-14"><a href="#cb56-14" aria-hidden="true" tabindex="-1"></a>  (<span class="st">&quot;linear_regression&quot;</span>, LinearRegression())]</span>
+<span id="cb56-15"><a href="#cb56-15" aria-hidden="true" tabindex="-1"></a>).set_output(transform<span class="op">=</span><span class="st">&quot;pandas&quot;</span>)</span>
+<span id="cb56-16"><a href="#cb56-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-17"><a href="#cb56-17" aria-hidden="true" tabindex="-1"></a>degrees <span class="op">=</span> {</span>
+<span id="cb56-18"><a href="#cb56-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;preprocessing__polynomial_area__degree&#39;</span>: np.arange(<span class="dv">1</span>, <span class="dv">10</span>),</span>
+<span id="cb56-19"><a href="#cb56-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;preprocessing__polynomial_rooms__degree&#39;</span>: np.arange(<span class="dv">1</span>, <span class="dv">10</span>)</span>
+<span id="cb56-20"><a href="#cb56-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb56-21"><a href="#cb56-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-22"><a href="#cb56-22" aria-hidden="true" tabindex="-1"></a>gscv <span class="op">=</span> GridSearchCV(lr_pipeline_poly, degrees, cv <span class="op">=</span> <span class="dv">5</span>, scoring<span class="op">=</span><span class="st">&#39;r2&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-51" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="61">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>gscv_fitted <span class="op">=</span> gscv.fit(X, y)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>gscv_fitted.cv_results_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>{&#39;mean_fit_time&#39;: array([0.00721402, 0.00668373, 0.00655928, 0.00664382, 0.00677524, 0.00683608, 0.00722866, 0.00724444, 0.00779185, 0.00706654,
+        0.00754271, 0.00736976, 0.00694814, 0.00683789, 0.00714722, 0.00769448, 0.00797653, 0.00872087, 0.00732474, 0.00744863,
+        0.00721235, 0.00697494, 0.00711794, 0.00712695, 0.00772481, 0.00795135, 0.00814986, 0.00728579, 0.00751691, 0.00770516,
+        0.00785799, 0.00789599, 0.01009231, 0.00772138, 0.00782037, 0.00798578, 0.00697708, 0.00704741, 0.00767531, 0.00780039,
+        0.00866823, 0.00783491, 0.007972  , 0.00784883, 0.00805154, 0.00706329, 0.00711613, 0.00730653, 0.00804305, 0.00798979,
+        0.0081768 , 0.00812855, 0.00842319, 0.00849266, 0.00739923, 0.00788727, 0.00802131, 0.00809307, 0.00813146, 0.00785546,
+        0.00781975, 0.00811391, 0.00841436, 0.00755415, 0.00762839, 0.00749078, 0.00775781, 0.00797172, 0.00773973, 0.00810566,
+        0.00794764, 0.00804958, 0.0074965 , 0.00748606, 0.00815864, 0.00783529, 0.00781832, 0.00788436, 0.00816412, 0.00818672,
+        0.00833416]),
+ &#39;std_fit_time&#39;: array([7.94206197e-04, 1.78754453e-04, 1.03025035e-04, 1.63835683e-04, 1.63729425e-04, 2.92262383e-04, 3.83772320e-04,
+        2.16808297e-04, 4.24816619e-04, 2.61262704e-04, 2.63734171e-04, 2.93555609e-04, 2.46370025e-04, 1.29173012e-04,
+        1.57040119e-04, 2.56212197e-04, 3.97463866e-04, 8.59726698e-04, 2.52354974e-04, 2.97514420e-04, 4.64116127e-04,
+        2.32332122e-04, 1.78164983e-04, 1.17006123e-04, 4.84435140e-04, 3.30143901e-04, 3.33188953e-04, 5.02092759e-04,
+        4.86110317e-04, 3.87156225e-04, 7.24616773e-04, 4.09781808e-04, 2.14018376e-03, 5.20834593e-04, 3.16145949e-04,
+        2.84657702e-04, 2.73560484e-04, 3.39372412e-04, 6.58309465e-04, 2.80283340e-04, 6.31337897e-04, 3.55885042e-04,
+        2.53410710e-04, 2.70461708e-04, 1.76700539e-04, 2.32191574e-04, 2.24991175e-04, 2.80454092e-04, 7.52987627e-05,
+        3.59908102e-04, 1.85595166e-04, 4.21998908e-04, 2.90396280e-04, 3.01624527e-04, 2.15228342e-04, 3.50412915e-04,
+        2.82961751e-04, 4.37147325e-04, 1.61720248e-04, 3.14168510e-04, 2.55647899e-04, 3.76920015e-04, 2.66012856e-04,
+        2.62501458e-04, 3.68455728e-04, 2.16129492e-04, 2.11570374e-04, 2.85406594e-04, 3.55130261e-04, 1.39681923e-04,
+        1.40570219e-04, 2.04233402e-04, 3.58452057e-04, 2.60871478e-04, 2.75018137e-04, 3.08845429e-04, 2.08512040e-04,
+        1.64781745e-04, 3.48117755e-04, 2.92128034e-04, 3.41309999e-04]),
+ &#39;mean_score_time&#39;: array([0.00331039, 0.00308566, 0.0031467 , 0.00330114, 0.00317717, 0.0032043 , 0.0033452 , 0.00335603, 0.00352197, 0.00329633,
+        0.00349422, 0.00355563, 0.00315676, 0.00315537, 0.00329003, 0.00350914, 0.00363102, 0.00407386, 0.00346208, 0.00377569,
+        0.00326824, 0.00322943, 0.00323453, 0.00329499, 0.00346131, 0.00364242, 0.00378127, 0.00377455, 0.00357766, 0.00366769,
+        0.00365992, 0.00382385, 0.00502281, 0.00347285, 0.00344276, 0.0035553 , 0.00317149, 0.00324969, 0.00357957, 0.00356159,
+        0.00403042, 0.00372281, 0.00359001, 0.00349464, 0.00346766, 0.00318007, 0.00321999, 0.00338006, 0.00364299, 0.00369277,
+        0.00374851, 0.00372529, 0.00382791, 0.00380697, 0.00354037, 0.00365825, 0.00367374, 0.0035738 , 0.00380697, 0.00374541,
+        0.00365443, 0.00368319, 0.00370655, 0.0034771 , 0.00355687, 0.00338073, 0.00349874, 0.00344453, 0.00342388, 0.00373836,
+        0.00362678, 0.00351353, 0.00334702, 0.00339255, 0.00352259, 0.0033896 , 0.00352087, 0.00344496, 0.00343161, 0.00347757,
+        0.00365605]),
+ &#39;std_score_time&#39;: array([1.27955713e-04, 4.78330657e-05, 1.10539390e-04, 4.42987186e-04, 6.80008910e-05, 1.86462194e-04, 1.57827006e-04,
+        2.24367231e-04, 8.43732866e-05, 1.57105101e-04, 2.50935952e-04, 2.29542425e-04, 9.44956752e-05, 7.03100553e-05,
+        1.53263697e-04, 2.62786148e-04, 2.74555970e-04, 5.00281539e-04, 2.81362936e-04, 4.84754742e-04, 1.29056221e-04,
+        1.32695257e-04, 9.92266619e-05, 1.16495465e-04, 7.34086740e-05, 1.52587712e-04, 3.23886507e-04, 5.39175899e-04,
+        4.24631064e-04, 2.32969021e-04, 2.23245635e-04, 5.45748358e-04, 1.30783576e-03, 1.46318273e-04, 1.20665525e-04,
+        1.68789712e-04, 8.27805512e-05, 1.44682908e-04, 1.68871016e-04, 2.49462025e-04, 5.16910007e-04, 1.69332025e-04,
+        1.55224638e-04, 1.45355781e-04, 4.16984757e-05, 5.90636305e-05, 6.12390733e-05, 1.13632706e-04, 1.21241921e-04,
+        9.40944348e-05, 7.53254212e-05, 3.57822206e-04, 2.06710839e-04, 1.17875708e-04, 2.11548234e-04, 1.02973799e-04,
+        8.82440467e-05, 9.55864775e-05, 2.55827139e-04, 2.64138890e-04, 1.69111453e-04, 1.48645416e-04, 1.72224485e-04,
+        2.01841457e-04, 1.91147394e-04, 1.11729306e-04, 8.14405760e-05, 9.46818505e-05, 1.65013383e-04, 5.22824057e-05,
+        1.36982577e-04, 1.92183619e-04, 1.12851107e-04, 6.87414308e-05, 6.62047483e-05, 7.54583315e-05, 1.24456654e-04,
+        1.17065358e-04, 9.29949093e-05, 8.35702523e-05, 4.42664656e-05]),
+ &#39;param_preprocessing__polynomial_area__degree&#39;: masked_array(data=[1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5,
+                    5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9,
+                    9, 9, 9, 9, 9, 9, 9],
+              mask=[False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False,
+                    False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False,
+                    False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False,
+                    False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False,
+                    False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False,
+                    False],
+        fill_value=999999),
+ &#39;param_preprocessing__polynomial_rooms__degree&#39;: masked_array(data=[1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1,
+                    2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2,
+                    3, 4, 5, 6, 7, 8, 9],
+              mask=[False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False,
+                    False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False,
+                    False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False,
+                    False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False,
+                    False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False,
+                    False],
+        fill_value=999999),
+ &#39;params&#39;: [{&#39;preprocessing__polynomial_area__degree&#39;: np.int64(1),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(1)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(1),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(2)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(1),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(3)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(1),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(4)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(1),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(5)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(1),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(6)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(1),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(7)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(1),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(8)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(1),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(9)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(2),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(1)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(2),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(2)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(2),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(3)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(2),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(4)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(2),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(5)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(2),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(6)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(2),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(7)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(2),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(8)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(2),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(9)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(3),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(1)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(3),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(2)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(3),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(3)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(3),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(4)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(3),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(5)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(3),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(6)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(3),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(7)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(3),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(8)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(3),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(9)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(4),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(1)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(4),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(2)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(4),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(3)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(4),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(4)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(4),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(5)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(4),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(6)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(4),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(7)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(4),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(8)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(4),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(9)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(5),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(1)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(5),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(2)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(5),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(3)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(5),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(4)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(5),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(5)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(5),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(6)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(5),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(7)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(5),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(8)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(5),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(9)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(6),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(1)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(6),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(2)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(6),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(3)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(6),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(4)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(6),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(5)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(6),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(6)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(6),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(7)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(6),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(8)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(6),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(9)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(7),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(1)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(7),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(2)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(7),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(3)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(7),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(4)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(7),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(5)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(7),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(6)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(7),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(7)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(7),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(8)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(7),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(9)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(8),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(1)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(8),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(2)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(8),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(3)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(8),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(4)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(8),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(5)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(8),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(6)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(8),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(7)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(8),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(8)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(8),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(9)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(9),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(1)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(9),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(2)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(9),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(3)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(9),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(4)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(9),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(5)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(9),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(6)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(9),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(7)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(9),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(8)},
+  {&#39;preprocessing__polynomial_area__degree&#39;: np.int64(9),
+   &#39;preprocessing__polynomial_rooms__degree&#39;: np.int64(9)}],
+ &#39;split0_test_score&#39;: array([0.53197809, 0.52048972, 0.5242219 , 0.53184271, 0.5319609 , 0.53190067, 0.53133617, 0.53065113, 0.53099301, 0.53171602,
+        0.52917544, 0.53081818, 0.53758574, 0.53735141, 0.53745662, 0.53727551, 0.53658738, 0.53667799, 0.54522363, 0.53567001,
+        0.535909  , 0.539459  , 0.53930066, 0.539385  , 0.54040967, 0.54022413, 0.54059694, 0.54368338, 0.53560972, 0.53613266,
+        0.53891334, 0.53879647, 0.53875508, 0.53928681, 0.53950219, 0.53922197, 0.50847886, 0.50847886, 0.50158189, 0.50037317,
+        0.50052238, 0.50565323, 0.50525065, 0.5060454 , 0.50739236, 0.50803388, 0.50803388, 0.50803388, 0.50803388, 0.50803388,
+        0.50163672, 0.50358827, 0.49771591, 0.49827708, 0.50404864, 0.50404864, 0.50404864, 0.50404864, 0.50404864, 0.50404864,
+        0.50404864, 0.50404864, 0.50404863, 0.48824759, 0.48824759, 0.48824759, 0.48824759, 0.48824759, 0.48824759, 0.48824759,
+        0.48824759, 0.48824759, 0.45353318, 0.45353318, 0.45353318, 0.45353318, 0.45353318, 0.45353318, 0.45353318, 0.45353318,
+        0.45353318]),
+ &#39;split1_test_score&#39;: array([0.53225302, 0.53730671, 0.5354238 , 0.53544608, 0.53500045, 0.53504   , 0.53405576, 0.53534435, 0.53255867, 0.52618888,
+        0.51997812, 0.52445722, 0.52151401, 0.52031442, 0.5213231 , 0.52000604, 0.52030135, 0.52045329, 0.53488419, 0.53893104,
+        0.53895206, 0.53586829, 0.53451754, 0.53534432, 0.53313162, 0.53172175, 0.53188811, 0.53515229, 0.5378053 , 0.53748075,
+        0.53486689, 0.53351767, 0.53370892, 0.53397651, 0.53052449, 0.53028196, 0.45451042, 0.45451042, 0.49887653, 0.49833781,
+        0.49889726, 0.49114737, 0.48943156, 0.49175628, 0.49246116, 0.45231332, 0.45231332, 0.45231332, 0.45231332, 0.45231332,
+        0.49100453, 0.48652813, 0.49273157, 0.4899853 , 0.44389116, 0.44389116, 0.44389116, 0.44389116, 0.44389116, 0.44389116,
+        0.44389116, 0.44389116, 0.44389113, 0.42226201, 0.42226201, 0.42226201, 0.42226201, 0.42226201, 0.42226201, 0.42226201,
+        0.42226201, 0.42226201, 0.38464168, 0.38464168, 0.38464168, 0.38464168, 0.38464168, 0.38464168, 0.38464168, 0.38464168,
+        0.38464168]),
+ &#39;split2_test_score&#39;: array([ 4.28295335e-01,  4.34384984e-01,  4.37847834e-01,  4.22601291e-01,  4.19178646e-01,  4.19085877e-01,  4.19064840e-01,
+         4.19415299e-01,  4.21259348e-01,  4.56095393e-01,  4.51860030e-01,  4.43445488e-01,  4.18640590e-01,  4.09008772e-01,
+         4.09765911e-01,  4.09793877e-01,  4.09770609e-01,  4.11189171e-01,  5.12144056e-01,  5.12220846e-01,  5.04808000e-01,
+         4.72189910e-01,  4.63061655e-01,  4.66764703e-01,  4.72076117e-01,  4.69446965e-01,  4.70212296e-01,  4.62271793e-01,
+         4.71003120e-01,  4.78875121e-01,  4.99315938e-01,  4.99833561e-01,  4.99084378e-01,  4.85716548e-01,  4.80241761e-01,
+         4.82765494e-01,  1.73388198e-01,  1.73388200e-01,  3.49255103e-01,  3.25645321e-01,  3.18007950e-01,  4.36671721e-01,
+         4.54114712e-01,  1.90091755e-01, -5.34667848e-02, -3.94185080e-01, -3.94185080e-01, -3.94185080e-01, -3.94185079e-01,
+        -3.94185116e-01,  2.77298023e-01,  3.12563456e-01, -3.76243939e-01, -5.21517930e-01, -1.67096397e+00, -1.67096397e+00,
+        -1.67096397e+00, -1.67096397e+00, -1.67096397e+00, -1.67096397e+00, -1.67096397e+00, -1.67096395e+00, -3.16658257e-03,
+        -4.78706751e+00, -4.78706751e+00, -4.78706751e+00, -4.78706751e+00, -4.78706751e+00, -4.78706751e+00, -4.78706751e+00,
+        -4.78706751e+00, -4.78706751e+00, -1.26045606e+01, -1.26045606e+01, -1.26045606e+01, -1.26045606e+01, -1.26045606e+01,
+        -1.26045606e+01, -1.26045606e+01, -1.26045606e+01, -1.26045606e+01]),
+ &#39;split3_test_score&#39;: array([ 5.65747933e-01,  5.71443248e-01,  5.88074536e-01,  6.15356800e-01,  6.16704667e-01,  5.85729787e-01, -1.68548642e+00,
+        -7.53704630e+00, -7.35541347e-01,  5.82384226e-01,  5.75605343e-01,  5.83533300e-01,  6.03073637e-01,  5.89473109e-01,
+         6.02705181e-01, -2.99315877e-01, -2.94565107e+00,  3.93171782e-01,  5.92700776e-01,  5.95944652e-01,  5.90476893e-01,
+         6.00342945e-01,  5.92295929e-01,  5.80443274e-01,  9.10995256e-02,  2.35102607e-03, -7.37209136e+00,  5.98283077e-01,
+         6.00690609e-01,  5.94677945e-01,  6.03129180e-01,  6.02505573e-01,  5.87165031e-01,  6.02993567e-01, -7.65679198e-01,
+        -1.96617401e+00,  5.47422750e-01,  5.47422750e-01,  5.78129173e-01,  5.65126996e-01,  5.50867925e-01,  5.75923953e-01,
+         5.38009246e-01,  3.89365221e-01,  5.47754493e-01,  5.32731296e-01,  5.32731296e-01,  5.32731296e-01,  5.32731296e-01,
+         5.32731303e-01,  5.80267775e-01,  5.77098929e-01,  3.65134648e-01,  2.46906491e-01,  3.13703561e-01,  3.13703561e-01,
+         3.13703561e-01,  3.13703561e-01,  3.13703561e-01,  3.13703561e-01,  3.13703561e-01,  3.13703386e-01,  3.13703438e-01,
+        -1.49591380e+00, -1.49591380e+00, -1.49591380e+00, -1.49591380e+00, -1.49591380e+00, -1.49591380e+00, -1.49591380e+00,
+        -1.49591380e+00, -1.49591380e+00, -1.14656045e+01, -1.14656045e+01, -1.14656045e+01, -1.14656045e+01, -1.14656045e+01,
+        -1.14656045e+01, -1.14656045e+01, -1.14656045e+01, -1.14656045e+01]),
+ &#39;split4_test_score&#39;: array([0.60613781, 0.59828957, 0.59405278, 0.60239686, 0.60248625, 0.60255496, 0.60137637, 0.60019991, 0.60150624, 0.59097517,
+        0.59121783, 0.58841648, 0.59627402, 0.59518882, 0.59531701, 0.59473349, 0.59380085, 0.59488935, 0.60325038, 0.60151956,
+        0.60004927, 0.60410178, 0.60357001, 0.60391647, 0.6052808 , 0.60476943, 0.60575146, 0.60824746, 0.60597897, 0.60506073,
+        0.60781038, 0.60751695, 0.60771513, 0.60851303, 0.60881886, 0.6085812 , 0.57550038, 0.57550038, 0.59830874, 0.59332897,
+        0.59517719, 0.60274955, 0.60245951, 0.60202365, 0.60374335, 0.5702938 , 0.5702938 , 0.5702938 , 0.5702938 , 0.5702938 ,
+        0.58205439, 0.57970186, 0.58127149, 0.57843236, 0.55592936, 0.55592936, 0.55592936, 0.55592936, 0.55592936, 0.55592936,
+        0.55592936, 0.55592936, 0.55592936, 0.53199329, 0.53199329, 0.53199329, 0.53199329, 0.53199329, 0.53199329, 0.53199329,
+        0.53199329, 0.53199329, 0.50402514, 0.50402514, 0.50402514, 0.50402514, 0.50402514, 0.50402514, 0.50402514, 0.50402514,
+        0.50402514]),
+ &#39;mean_test_score&#39;: array([ 0.53288244,  0.53238285,  0.53592417,  0.54152875,  0.54106618,  0.53486226,  0.08006934, -1.09028712,  0.27015518,
+         0.53747194,  0.53356735,  0.53413413,  0.5354176 ,  0.53026731,  0.53331356,  0.35249861, -0.17703818,  0.49127632,
+         0.55764061,  0.55685722,  0.55403905,  0.55039238,  0.54654916,  0.54517075,  0.44839955,  0.42970266, -1.04472851,
+         0.5495276 ,  0.55021754,  0.55044544,  0.55680714,  0.55643404,  0.55328571,  0.55409729,  0.27868162,  0.03893532,
+         0.45186012,  0.45186012,  0.50523029,  0.49656245,  0.49269454,  0.52242916,  0.51785313,  0.43585646,  0.41957692,
+         0.33383744,  0.33383744,  0.33383744,  0.33383744,  0.33383744,  0.48645229,  0.49189613,  0.31212193,  0.25841666,
+         0.02932175,  0.02932175,  0.02932175,  0.02932175,  0.02932175,  0.02932175,  0.02932175,  0.02932172,  0.36288119,
+        -0.96809568, -0.96809568, -0.96809568, -0.96809568, -0.96809568, -0.96809568, -0.96809568, -0.96809568, -0.96809568,
+        -4.54559303, -4.54559303, -4.54559303, -4.54559303, -4.54559303, -4.54559303, -4.54559303, -4.54559303, -4.54559303]),
+ &#39;std_test_score&#39;: array([0.05896807, 0.05592617, 0.0563112 , 0.06845446, 0.06995695, 0.06416039, 0.88471594, 3.22390354, 0.50615086, 0.04829553,
+        0.04893018, 0.05237541, 0.06650673, 0.06719078, 0.06940401, 0.33136803, 1.38559002, 0.07705416, 0.03478919, 0.03545477,
+        0.03584597, 0.04863306, 0.05002321, 0.04684603, 0.18356525, 0.2179359 , 3.16397305, 0.05230583, 0.04959686, 0.04568281,
+        0.04208055, 0.04188534, 0.03909615, 0.04615634, 0.52378599, 1.00335969, 0.14503686, 0.14503685, 0.08758971, 0.09305396,
+        0.09434192, 0.05987884, 0.05018706, 0.14016029, 0.23964172, 0.36602407, 0.36602407, 0.36602407, 0.36602407, 0.36602409,
+        0.11129951, 0.09725749, 0.3510454 , 0.4054621 , 0.85397816, 0.85397816, 0.85397816, 0.85397816, 0.85397816, 0.85397816,
+        0.85397816, 0.85397815, 0.20008392, 2.05754392, 2.05754392, 2.05754392, 2.05754392, 2.05754392, 2.05754392, 2.05754392,
+        2.05754392, 2.05754392, 6.1258573 , 6.1258573 , 6.1258573 , 6.1258573 , 6.1258573 , 6.1258573 , 6.1258573 , 6.1258573 ,
+        6.1258573 ]),
+ &#39;rank_test_score&#39;: array([23, 24, 17, 14, 15, 19, 51, 72, 49, 16, 21, 20, 18, 25, 22, 41, 61, 32,  1,  2,  6,  9, 12, 13, 36, 38, 71, 11, 10,  8,  3,
+         4,  7,  5, 48, 52, 35, 34, 28, 29, 30, 26, 27, 37, 39, 44, 45, 43, 42, 46, 33, 31, 47, 50, 56, 58, 57, 55, 54, 53, 59, 60,
+        40, 62, 62, 62, 62, 66, 67, 68, 69, 70, 80, 80, 75, 75, 75, 75, 75, 73, 74], dtype=int32)}</code></pre>
+</div>
+</div>
+<div id="cell-52" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="62">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>gscv_fitted.cv_results_[<span class="st">&#39;mean_test_score&#39;</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>array([ 0.53288244,  0.53238285,  0.53592417,  0.54152875,  0.54106618,  0.53486226,  0.08006934, -1.09028712,  0.27015518,
+        0.53747194,  0.53356735,  0.53413413,  0.5354176 ,  0.53026731,  0.53331356,  0.35249861, -0.17703818,  0.49127632,
+        0.55764061,  0.55685722,  0.55403905,  0.55039238,  0.54654916,  0.54517075,  0.44839955,  0.42970266, -1.04472851,
+        0.5495276 ,  0.55021754,  0.55044544,  0.55680714,  0.55643404,  0.55328571,  0.55409729,  0.27868162,  0.03893532,
+        0.45186012,  0.45186012,  0.50523029,  0.49656245,  0.49269454,  0.52242916,  0.51785313,  0.43585646,  0.41957692,
+        0.33383744,  0.33383744,  0.33383744,  0.33383744,  0.33383744,  0.48645229,  0.49189613,  0.31212193,  0.25841666,
+        0.02932175,  0.02932175,  0.02932175,  0.02932175,  0.02932175,  0.02932175,  0.02932175,  0.02932172,  0.36288119,
+       -0.96809568, -0.96809568, -0.96809568, -0.96809568, -0.96809568, -0.96809568, -0.96809568, -0.96809568, -0.96809568,
+       -4.54559303, -4.54559303, -4.54559303, -4.54559303, -4.54559303, -4.54559303, -4.54559303, -4.54559303, -4.54559303])</code></pre>
+</div>
+</div>
+<div id="cell-53" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="66">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dataframe of the resuls #assisted by ChatGPT</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>cv_results <span class="op">=</span> gscv_fitted.cv_results_</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a DataFrame using the mean_test_score and parameter columns</span></span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;degree_polynomial_area&#39;</span>: cv_results[<span class="st">&#39;param_preprocessing__polynomial_area__degree&#39;</span>],</span>
+<span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;degree_polynomial_rooms&#39;</span>: cv_results[<span class="st">&#39;param_preprocessing__polynomial_rooms__degree&#39;</span>],</span>
+<span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;mean_test_score&#39;</span>: cv_results[<span class="st">&#39;mean_test_score&#39;</span>]</span>
+<span id="cb61-9"><a href="#cb61-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb61-10"><a href="#cb61-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-11"><a href="#cb61-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort the DataFrame by mean_test_score in descending order to show the best results first</span></span>
+<span id="cb61-12"><a href="#cb61-12" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> results_df.sort_values(by<span class="op">=</span><span class="st">&#39;mean_test_score&#39;</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb61-13"><a href="#cb61-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-14"><a href="#cb61-14" aria-hidden="true" tabindex="-1"></a>results_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">degree_polynomial_area</th>
+<th data-quarto-table-cell-role="th">degree_polynomial_rooms</th>
+<th data-quarto-table-cell-role="th">mean_test_score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">18</td>
+<td>3</td>
+<td>1</td>
+<td>0.557641</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">19</td>
+<td>3</td>
+<td>2</td>
+<td>0.556857</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">30</td>
+<td>4</td>
+<td>4</td>
+<td>0.556807</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">31</td>
+<td>4</td>
+<td>5</td>
+<td>0.556434</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">33</td>
+<td>4</td>
+<td>7</td>
+<td>0.554097</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">76</td>
+<td>9</td>
+<td>5</td>
+<td>-4.545593</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">77</td>
+<td>9</td>
+<td>6</td>
+<td>-4.545593</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">78</td>
+<td>9</td>
+<td>7</td>
+<td>-4.545593</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">72</td>
+<td>9</td>
+<td>1</td>
+<td>-4.545593</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">73</td>
+<td>9</td>
+<td>2</td>
+<td>-4.545593</td>
+</tr>
+</tbody>
+</table>
+
+<p>81 rows × 3 columns</p>
+</div>
+</div>
+</div>
+<p>Answers:</p>
+<ol type="1">
+<li><p>The best model accorind to mean_test_score is Model 18: with degree_polynomial_area of ‘3’ and degree_polynomial_rooms ‘1’. The mean_test_score is 0.557641.</p></li>
+<li><p>The model becomes cumbersome and so does the output. Basically after the 18th model tested, there was no goin in the r-squared from the following degrees in model. To make this process more efficient, it may have sense to start with a smaller range of polynomial degree eg. 1-5 and then see if the results started decreasing at any point of increasing polynomial. Another option would we to include R-squared check step into the pipeline and let the model simulation ‘break’ once the next iteration of degrees doesn’t yield higher R-squared eg. with logical function if().</p></li>
+</ol>
 </section>
 
 </main>
